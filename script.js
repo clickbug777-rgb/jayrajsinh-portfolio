@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           ${sc.image ? `
             <div class="showcase-media-wrap">
-              <img src="${sc.image}" alt="${sc.title}" class="showcase-media-img" loading="lazy" />
+              <img src="${sc.image}" alt="${sc.title}" class="showcase-media-img" loading="lazy" onerror="this.parentElement.style.display='none';" />
             </div>
           ` : ''}
           <div class="showcase-item-desc">${sc.desc}</div>
