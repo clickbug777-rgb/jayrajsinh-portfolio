@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JayrajSinh (Jay) — Business, Finance &amp; Digital Strategist</title>
+  <meta name="description" content="Portfolio of JayrajSinh (Jay) — Finance graduate at Bank of America, business enthusiast, entrepreneur, and digital builder." />
+  <meta name="theme-color" content="#1A1818" />
+
+  <!-- Google Fonts: Onest, Space Grotesk & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="loading">
+  <!-- Skip Link for Accessibility -->
+  <a href="#main" class="skip">Skip to main content</a>
+
+  <!-- ========================================================= -->
+  <!-- 1. INTRO LOADER: Stacked Pills of the 4 Disciplines       -->
+  <!-- ========================================================= -->
+  <aside id="loader" class="loader" aria-label="Page loading">
+    <div class="ld__bg"></div>
+    <div class="ld__stack" aria-hidden="true">
+      <div class="ld__pill" style="--k:0; --c:#8C6239; --t:#FFF;">
+        <span>01 · Business &amp; Finance</span>
+      </div>
+      <div class="ld__pill" style="--k:1; --c:#2C4B74; --t:#FFF;">
+        <span>02 · Web &amp; Digital Projects</span>
+      </div>
+      <div class="ld__pill" style="--k:2; --c:#7C4D35; --t:#FFF;">
+        <span>03 · Entrepreneurship &amp; Strategy</span>
+      </div>
+      <div class="ld__pill" style="--k:3; --c:#664B6B; --t:#FFF;">
+        <span>04 · Creative &amp; Visual Content</span>
+      </div>
+    </div>
+    <div class="ld__hud">
+      <div class="ld__top">
+        <span>JayrajSinh <b style="font-weight:400; opacity:.65;">(Jay)</b></span>
+        <span>Portfolio 2026</span>
+      </div>
+      <div class="ld__bot">
+        <div class="ld__num">
+          <small>INITIALIZING</small>
+          <span id="ldCount">0%</span>
+        </div>
+        <div class="ld__bar-wrap">
+          <div class="ld__bar" id="ldBar"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================= -->
+  <!-- 2. HANGING PULL-CORD (Light/Dark Mode Switcher)            -->
+  <!-- ========================================================= -->
+  <div id="cordHit" class="cord-wrap" title="Pull or click to switch theme" role="button" tabindex="0" aria-label="Toggle dark mode">
+    <div id="cord" class="cord">
+      <div class="cord__line"></div>
+      <div class="cord__bead"></div>
+      <div class="cord__handle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+          <circle cx="12" cy="12" r="4"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 3. TOP NAVIGATION                                         -->
+  <!-- ========================================================= -->
+  <header class="site-header shell">
+    <div class="header-inner">
+      <a href="#" class="brand-badge">
+        <span class="brand-monogram">J</span>
+        <span class="brand-name">JayrajSinh</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#doors" class="nav-link">The Doors</a>
+        <a href="#story" class="nav-link">My Story</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="live-status pill">
+          <span class="pulse-dot"></span>
+          <span class="status-txt">Bank of America · GIFT City</span>
+        </div>
+        <button class="btn btn-primary btn-sm open-contact-btn">
+          <span>Let's Connect</span>
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ========================================================= -->
+    <!-- 4. HERO SECTION                                           -->
+    <!-- ========================================================= -->
+    <section id="about" class="hero shell">
+      <div class="hero__grid">
+        
+        <!-- Left Column: Typography & Badges -->
+        <div class="hero__content rv">
+          <div class="hero__meta-row">
+            <div class="chip">
+              <span class="chip__dot"></span>
+              <span>Gandhinagar / Ahmedabad · IST (UTC+5:30)</span>
+            </div>
+            <div class="chip tnum" id="istTimeChip">
+              <span>IST --:--</span>
+            </div>
+          </div>
+
+          <div class="hero__kicker">
+            <span class="kicker-tag">Business-minded</span>
+            <span class="kicker-sep">·</span>
+            <span class="kicker-tag">Creatively driven</span>
+            <span class="kicker-sep">·</span>
+            <span class="kicker-tag">Digitally focused</span>
+          </div>
+
+          <h1 class="hero__headline">
+            <span class="line"><span>Hey, I'm JayrajSinh.</span></span>
+            <span class="line"><span class="highlight">Finance graduate,</span></span>
+            <span class="line"><span>business enthusiast &amp;</span></span>
+            <span class="line"><span>digital builder.</span></span>
+          </h1>
+
+          <p class="hero__bio">
+            Passionate about turning ideas into meaningful digital experiences. Currently working in Mortgage Operations (CVL) at <strong>Bank of America</strong>, while exploring modern web tools, digital product strategy, and practical entrepreneurial solutions.
+          </p>
+
+          <div class="hero__cta-group">
+            <button class="btn btn-primary open-contact-btn">
+              <span>Start a Conversation</span>
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+            </button>
+            <a href="#doors" class="btn btn-outline">
+              <span>Explore The Doors</span>
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Quick capability tags -->
+          <div class="hero__tags">
+            <span class="tag-pill">Financial Analysis</span>
+            <span class="tag-pill">Digital Product Strategy</span>
+            <span class="tag-pill">Claude Code Development</span>
+            <span class="tag-pill">Web Platforms</span>
+            <span class="tag-pill">Photography</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive 3D Ability Card / Portrait -->
+        <div class="hero__card-col rv" style="--d:120ms;">
+          <div class="ability-card" id="abilityCard" data-tilt>
+            <div class="ability-card__inner">
+              
+              <!-- Card Header -->
+              <div class="ac__header">
+                <div class="ac__id">
+                  <span class="ac__badge">ABILITY CARD</span>
+                  <span class="ac__num">NO. 001/26</span>
+                </div>
+                <div class="ac__brand">
+                  <span>JAYRAJSINH</span>
+                </div>
+              </div>
+
+              <!-- Card Visual / Photo Frame with User Photo -->
+              <div class="ac__visual">
+                <div class="ac__portrait-wrap">
+                  <img src="assets/images/portrait.png" alt="JayrajSinh" class="ac__portrait-img" onerror="this.onerror=null; this.src='assets/images/portrait.svg';" />
+                  <div id="avatarFallback" class="ac__portrait-fallback" style="display:none;">
+                    <div class="fallback-monogram">J</div>
+                    <div class="fallback-label">JayrajSinh (Jay)</div>
+                    <div class="fallback-sub">Finance · Strategy · Digital Builder</div>
+                  </div>
+                </div>
+                <div class="ac__glare"></div>
+              </div>
+
+              <!-- Card Specs / Meta -->
+              <div class="ac__body">
+                <div class="ac__role-title">Business Analyst &amp; Digital Builder</div>
+                
+                <div class="ac__metrics">
+                  <div class="ac__metric">
+                    <span class="ac__m-label">EDUCATION</span>
+                    <span class="ac__m-val">BBA (Hons.) Finance</span>
+                    <span class="ac__m-sub">PDEU · 8.4 CGPA</span>
+                  </div>
+                  <div class="ac__metric">
+                    <span class="ac__m-label">CURRENT ROLE</span>
+                    <span class="ac__m-val">Bank of America</span>
+                    <span class="ac__m-sub">Mortgage Ops (CVL)</span>
+                  </div>
+                  <div class="ac__metric">
+                    <span class="ac__m-label">ENTREPRENEURSHIP</span>
+                    <span class="ac__m-val">TapStars &amp; Bachpan</span>
+                    <span class="ac__m-sub">NFC &amp; EdTech Initiatives</span>
+                  </div>
+                  <div class="ac__metric">
+                    <span class="ac__m-label">PASSIONS</span>
+                    <span class="ac__m-val">Gym &amp; Visuals</span>
+                    <span class="ac__m-sub">Ambivert · Street Lens</span>
+                  </div>
+                </div>
+
+                <div class="ac__footer">
+                  <div class="ac__bar-code">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                  </div>
+                  <span class="ac__hologram">AUTHENTIC BUILDER</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="hero__scroll-hint">
+        <a href="#doors">
+          <span>Scroll to explore the doors</span>
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 5. THE FOUR DOORS SECTION                                 -->
+    <!-- ========================================================= -->
+    <section id="doors" class="doors-section">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-tag">THE DOORS</div>
+          <h2 class="section-title">My focus, one door per discipline</h2>
+          <p class="section-subtitle">
+            Explore my background across finance, web projects, entrepreneurial ventures, and creative media. Click any door to inspect practical work and case studies.
+          </p>
+        </div>
+
+        <!-- Doors Carousel / Wall -->
+        <div class="doors-wall" id="doorsWall">
+          
+          <!-- DOOR 1: Business & Finance -->
+          <article class="door-card" data-door="1" style="--door-accent:#8C6239; --door-gradient:linear-gradient(135deg, #2A1D13 0%, #15100C 100%);">
+            <div class="door-frame">
+              <div class="door-inner">
+                <div class="door-top">
+                  <span class="door-index">DOOR // 01</span>
+                  <span class="door-status-pill">Finance &amp; Banking</span>
+                </div>
+                
+                <div class="door-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M3 3v18h18"/>
+                    <path d="m19 9-5 5-4-4-3 3"/>
+                  </svg>
+                </div>
+
+                <div class="door-info">
+                  <h3 class="door-title">Business &amp; Finance</h3>
+                  <p class="door-desc">
+                    Financial statement analysis, corporate lending, banking operations, market research, and strategic valuation.
+                  </p>
+                </div>
+
+                <div class="door-highlights">
+                  <span class="dh-chip">Bank of America (CVL)</span>
+                  <span class="dh-chip">Robo-Advisory Research</span>
+                  <span class="dh-chip">BBA (Hons.) Finance</span>
+                </div>
+
+                <button class="door-action" aria-label="Open Business & Finance door">
+                  <span>Enter Door 01</span>
+                  <span class="door-arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- DOOR 2: Web & Digital Projects -->
+          <article class="door-card" data-door="2" style="--door-accent:#2C4B74; --door-gradient:linear-gradient(135deg, #101E31 0%, #09111C 100%);">
+            <div class="door-frame">
+              <div class="door-inner">
+                <div class="door-top">
+                  <span class="door-index">DOOR // 02</span>
+                  <span class="door-status-pill">Digital Products</span>
+                </div>
+                
+                <div class="door-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                </div>
+
+                <div class="door-info">
+                  <h3 class="door-title">Web &amp; Digital Projects</h3>
+                  <p class="door-desc">
+                    Modern full-cycle web development, digital product interfaces, Claude Code workflows, and B2B web experiences.
+                  </p>
+                </div>
+
+                <div class="door-highlights">
+                  <span class="dh-chip">Elwont Pharmaceuticals</span>
+                  <span class="dh-chip">TapStars Review Platform</span>
+                  <span class="dh-chip">Claude Code Workflow</span>
+                </div>
+
+                <button class="door-action" aria-label="Open Web & Digital Projects door">
+                  <span>Enter Door 02</span>
+                  <span class="door-arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- DOOR 3: Entrepreneurship & Business -->
+          <article class="door-card" data-door="3" style="--door-accent:#7C4D35; --door-gradient:linear-gradient(135deg, #2C1B13 0%, #170E0A 100%);">
+            <div class="door-frame">
+              <div class="door-inner">
+                <div class="door-top">
+                  <span class="door-index">DOOR // 03</span>
+                  <span class="door-status-pill">Ventures &amp; Growth</span>
+                </div>
+                
+                <div class="door-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/>
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                    <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
+                  </svg>
+                </div>
+
+                <div class="door-info">
+                  <h3 class="door-title">Entrepreneurship &amp; Strategy</h3>
+                  <p class="door-desc">
+                    Hands-on business operations, hardware/NFC solutions for local business growth, brand development, and market analysis.
+                  </p>
+                </div>
+
+                <div class="door-highlights">
+                  <span class="dh-chip">TapStars NFC Cards</span>
+                  <span class="dh-chip">Grad Squad Apparel</span>
+                  <span class="dh-chip">SunFuel Electric</span>
+                </div>
+
+                <button class="door-action" aria-label="Open Entrepreneurship door">
+                  <span>Enter Door 03</span>
+                  <span class="door-arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- DOOR 4: Creative & Content -->
+          <article class="door-card" data-door="4" style="--door-accent:#664B6B; --door-gradient:linear-gradient(135deg, #251B27 0%, #120D13 100%);">
+            <div class="door-frame">
+              <div class="door-inner">
+                <div class="door-top">
+                  <span class="door-index">DOOR // 04</span>
+                  <span class="door-status-pill">Visuals &amp; Media</span>
+                </div>
+                
+                <div class="door-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                    <circle cx="12" cy="13" r="3"/>
+                  </svg>
+                </div>
+
+                <div class="door-info">
+                  <h3 class="door-title">Creative &amp; Visuals</h3>
+                  <p class="door-desc">
+                    Visual storytelling, street and portrait photography, video editing, branding concepts, and visual media strategy.
+                  </p>
+                </div>
+
+                <div class="door-highlights">
+                  <span class="dh-chip">SunFuel Hotel Campaigns</span>
+                  <span class="dh-chip">Pratham POS Suite</span>
+                  <span class="dh-chip">Photography</span>
+                </div>
+
+                <button class="door-action" aria-label="Open Creative door">
+                  <span>Enter Door 04</span>
+                  <span class="door-arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 6. MY STORY: TIME-TUNNEL REVERSE CHRONOLOGICAL TIMELINE   -->
+    <!-- ========================================================= -->
+    <section id="story" class="story-section">
+      <!-- Background Interactive Canvas (Odometer Tunnel) -->
+      <canvas id="storyCanvas" class="story-canvas" aria-hidden="true"></canvas>
+
+      <div class="shell story-container">
+        
+        <!-- Sticky Left Panel: Year Odometer & HUD -->
+        <aside class="story-hud">
+          <div class="story-hud__inner">
+            <div class="story-hud__tag">MY STORY</div>
+            <h2 class="story-hud__title">Let's go back in time.</h2>
+            
+            <!-- Rolling mechanical digits -->
+            <div class="odometer" aria-label="Timeline Year">
+              <span class="odometer-digit" id="odoD1">2</span>
+              <span class="odometer-digit" id="odoD2">0</span>
+              <span class="odometer-digit" id="odoD3">2</span>
+              <span class="odometer-digit" id="odoD4">6</span>
+            </div>
+
+            <div class="story-hud__meta">
+              <span class="hud-chapter-count" id="chapterCount">01 / 06</span>
+              <span class="hud-when" id="chapterWhen">2026 — Present</span>
+            </div>
+
+            <div class="story-hud__progress">
+              <div class="progress-bar" id="storyProgressBar"></div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Scrolling Timeline Chapters -->
+        <div class="story-chapters" id="storyChapters">
+          
+          <!-- CHAPTER 1: Bank of America -->
+          <article class="chapter-card active" data-year="2026" data-when="2026 — Present" data-index="1">
+            <div class="ch-badge">01 · CORPORATE BANKING</div>
+            <div class="ch-period">2026 — Present</div>
+            <h3 class="ch-title">Bank of America | BA Continuum India</h3>
+            <div class="ch-org">GIFT City, Gandhinagar</div>
+            <p class="ch-desc">
+              Working in <strong>Mortgage Operations</strong>, specifically within <strong>Consumer Vehicle Lending (CVL)</strong>.
+            </p>
+            <p class="ch-desc">
+              Managing loan funding pipelines, rigorous document compliance verification, and end-to-end loan processing while gaining deep firsthand exposure to large-scale banking operations and institutional financial services.
+            </p>
+            <div class="ch-tags">
+              <span>Mortgage Operations</span>
+              <span>Consumer Vehicle Lending</span>
+              <span>Loan Funding</span>
+              <span>Financial Compliance</span>
+            </div>
+          </article>
+
+          <!-- CHAPTER 2: Entrepreneurial & Digital Projects -->
+          <article class="chapter-card" data-year="2026" data-when="2026 — Present" data-index="2">
+            <div class="ch-badge">02 · VENTURES &amp; INNOVATION</div>
+            <div class="ch-period">2026 — Present</div>
+            <h3 class="ch-title">Entrepreneurial &amp; Digital Ventures</h3>
+            <div class="ch-org">TapStars &amp; Independent Initiatives</div>
+            <p class="ch-desc">
+              Exploring technology-driven entrepreneurship and building practical digital solutions.
+            </p>
+            <p class="ch-desc">
+              Co-founded <strong><a href="https://tapstars.pages.dev/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; text-underline-offset: 4px;">TapStars</a></strong>, an NFC-powered Google review solution and digital redirect platform helping retail stores, restaurants, and cafes capture instant 5-star customer reviews at counter checkouts.
+            </p>
+            <div class="ch-tags">
+              <a href="https://tapstars.pages.dev/" target="_blank" rel="noopener noreferrer" style="color:inherit;"><span>TapStars Platform ↗</span></a>
+              <span>Contactless NFC</span>
+              <span>Local Business Growth</span>
+              <span>RFID Solutions</span>
+            </div>
+          </article>
+
+          <!-- CHAPTER 3: Elwont Pharmaceuticals Project -->
+          <article class="chapter-card" data-year="2026" data-when="2026 — Present" data-index="3">
+            <div class="ch-badge">03 · B2B DIGITAL PLATFORM</div>
+            <div class="ch-period">2026 — Present</div>
+            <h3 class="ch-title">Elwont Pharmaceuticals | Digital Platform</h3>
+            <div class="ch-org">B2B Healthcare &amp; Pharma</div>
+            <p class="ch-desc">
+              Spearheading the digital transformation and web platform for <strong><a href="http://www.elwontpharmaceutical.com" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; text-underline-offset: 4px;">Elwont Pharmaceuticals</a></strong>.
+            </p>
+            <p class="ch-desc">
+              Structured product catalogs, engineered clean responsive navigation, refined company branding, and optimized lead-capture pipelines to generate active inbound business enquiries.
+            </p>
+            <div class="ch-tags">
+              <a href="http://www.elwontpharmaceutical.com" target="_blank" rel="noopener noreferrer" style="color:inherit;"><span>elwontpharmaceutical.com ↗</span></a>
+              <span>B2B Pharma</span>
+              <span>Product Architecture</span>
+              <span>Lead Gen</span>
+            </div>
+          </article>
+
+          <!-- CHAPTER 4: Bachpan Play School -->
+          <article class="chapter-card" data-year="2026" data-when="2026 — Present" data-index="4">
+            <div class="ch-badge">04 · EDUCATION &amp; OPERATIONS</div>
+            <div class="ch-period">2026 — Present</div>
+            <h3 class="ch-title">Bachpan Play School | Business Initiative</h3>
+            <div class="ch-org">Early Childhood Education</div>
+            <p class="ch-desc">
+              Leading business, marketing, and operational development for an educational institution.
+            </p>
+            <p class="ch-desc">
+              Spearheaded admissions initiatives, digital communication channels, localized marketing campaigns, and streamlined administrative procedures to support institutional growth.
+            </p>
+            <div class="ch-tags">
+              <span>Admissions Strategy</span>
+              <span>Operations</span>
+              <span>Institutional Growth</span>
+              <span>Marketing</span>
+            </div>
+          </article>
+
+          <!-- CHAPTER 5: SunFuel Electric -->
+          <article class="chapter-card" data-year="2025" data-when="Previous Experience" data-index="5">
+            <div class="ch-badge">05 · CLEAN ENERGY BRANDING</div>
+            <div class="ch-period">Previous Experience</div>
+            <h3 class="ch-title">SunFuel Electric | Brand Analyst</h3>
+            <div class="ch-org">EV Charging Infrastructure</div>
+            <p class="ch-desc">
+              Engaged in brand analysis, competitive industry research, and strategic marketing initiatives in the rapidly growing electric vehicle infrastructure sector.
+            </p>
+            <p class="ch-desc">
+              Synthesized market positioning data, analyzed consumer adoption trends, and contributed to branding creatives that communicated EV charging solutions.
+            </p>
+            <div class="ch-tags">
+              <span>Brand Research</span>
+              <span>EV Infrastructure</span>
+              <span>Market Analysis</span>
+              <span>Communications</span>
+            </div>
+          </article>
+
+          <!-- CHAPTER 6: PDEU University -->
+          <article class="chapter-card" data-year="2024" data-when="Academic Foundation" data-index="6">
+            <div class="ch-badge">06 · UNIVERSITY FOUNDATION</div>
+            <div class="ch-period">Academic Degree</div>
+            <h3 class="ch-title">Pandit Deendayal Energy University (PDEU)</h3>
+            <div class="ch-org">Gandhinagar, Gujarat</div>
+            <p class="ch-desc">
+              <strong>Bachelor of Business Administration (Honours)</strong><br />
+              • Major: Finance &nbsp;|&nbsp; Minor: Public Administration<br />
+              • Academic Standing: <strong>8.4 / 10 CGPA</strong>
+            </p>
+            <p class="ch-desc">
+              <strong>Key Research Project:</strong> <em>"Investor Perception Towards Robo-Advisory and Traditional Financial Advisory Services"</em> — empirical study contrasting algorithmic wealth management against human advisory across risk tolerance, trust, and fee sensitivity.
+            </p>
+            <div class="ch-tags">
+              <span>BBA (Hons.) Finance</span>
+              <span>8.4 CGPA</span>
+              <span>Robo-Advisory Research</span>
+              <span>Financial Modeling</span>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 7. AVAILABILITY & COLLABORATION CALLOUT                   -->
+    <!-- ========================================================= -->
+    <section class="collab-callout shell">
+      <div class="callout-box">
+        <div class="callout-content">
+          <div class="callout-pill">
+            <span class="pulse-dot"></span>
+            <span>CURRENT STATUS &amp; OUTLOOK</span>
+          </div>
+          <h2 class="callout-title">Let's talk business, digital projects, or new ideas.</h2>
+          <p class="callout-text">
+            Currently working at Bank of America. Always eager to connect regarding interesting collaborations, digital projects, creative initiatives, or discussions around business and technology.
+          </p>
+        </div>
+        <div class="callout-action">
+          <button class="btn btn-primary btn-lg open-contact-btn">
+            <span>Send a Message</span>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- 8. MASSIVE FULL-BLEED NAME FOOTER                         -->
+  <!-- ========================================================= -->
+  <footer id="contact" class="site-footer">
+    <div class="shell">
+      
+      <!-- Top Row: Links and Local Info -->
+      <div class="footer-grid">
+        <div class="fg-col">
+          <div class="fg-heading">THE DOORS</div>
+          <ul class="fg-list">
+            <li><button class="footer-door-trigger" data-door-id="1">01 · Business &amp; Finance</button></li>
+            <li><button class="footer-door-trigger" data-door-id="2">02 · Web &amp; Digital Projects</button></li>
+            <li><button class="footer-door-trigger" data-door-id="3">03 · Entrepreneurship &amp; Strategy</button></li>
+            <li><button class="footer-door-trigger" data-door-id="4">04 · Creative &amp; Visual Content</button></li>
+          </ul>
+        </div>
+
+        <div class="fg-col">
+          <div class="fg-heading">NAVIGATION</div>
+          <ul class="fg-list">
+            <li><a href="#about">About &amp; Overview</a></li>
+            <li><a href="#doors">The Doors</a></li>
+            <li><a href="#story">My Story Timeline</a></li>
+            <li><a href="#" class="open-contact-btn">Inquiry &amp; Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="fg-col">
+          <div class="fg-heading">CONNECT</div>
+          <ul class="fg-list">
+            <li>
+              <!-- Replaceable placeholder -->
+              <a href="mailto:your.email@example.com" class="social-link" title="Click to email (Replaceable placeholder)">
+                <span>Email</span>
+                <span class="external-hint">your.email@example.com</span>
+              </a>
+            </li>
+            <li>
+              <!-- Replaceable placeholder -->
+              <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener noreferrer" class="social-link" title="Replaceable LinkedIn URL">
+                <span>LinkedIn</span>
+                <span class="external-hint">/in/YOUR-LINKEDIN ↗</span>
+              </a>
+            </li>
+            <li>
+              <!-- Replaceable placeholder -->
+              <a href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener noreferrer" class="social-link" title="Replaceable GitHub URL">
+                <span>GitHub</span>
+                <span class="external-hint">@YOUR-GITHUB ↗</span>
+              </a>
+            </li>
+            <li>
+              <!-- Replaceable placeholder -->
+              <a href="https://instagram.com/YOUR-INSTAGRAM" target="_blank" rel="noopener noreferrer" class="social-link" title="Replaceable Instagram URL">
+                <span>Instagram</span>
+                <span class="external-hint">@YOUR-INSTAGRAM ↗</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="fg-col">
+          <div class="fg-heading">LOCATION &amp; TIME</div>
+          <div class="fg-loc">
+            <strong>Gandhinagar &amp; Ahmedabad</strong>
+            <span>Gujarat, India · UTC+5:30</span>
+            <div class="fg-clock">
+              <span class="clock-label">LOCAL TIME</span>
+              <span class="clock-val" id="footerTimeVal">--:-- --</span>
+            </div>
+          </div>
+          <div class="fg-status">
+            <span class="pulse-dot"></span>
+            <span>Bank of America, GIFT City</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-meta-row">
+        <span>© <span id="currentYear">2026</span> JayrajSinh (Jay). Designed &amp; built with intention.</span>
+        <button id="backToTop" class="back-to-top" aria-label="Back to top">
+          <span>Back to top</span>
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- The Signature Full-Bleed Name Banner (Stretches across 100vw) -->
+    <div class="massive-name-banner" aria-hidden="true">
+      <div class="banner-word" id="bannerWord">JAYRAJSINH</div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- 9. INTERACTIVE DOOR DRAWER / MODAL                        -->
+  <!-- ========================================================= -->
+  <div id="doorModal" class="door-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog">
+      <header class="modal-header">
+        <div class="modal-badge-group">
+          <span class="modal-number" id="modalDoorIndex">DOOR 01</span>
+          <span class="modal-domain" id="modalDoorDomain">Business &amp; Finance</span>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close details">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <h3 class="modal-title" id="modalDoorTitle">Title</h3>
+        <p class="modal-overview" id="modalDoorOverview">Overview</p>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title">Core Competencies &amp; Capabilities</h4>
+          <ul class="modal-list" id="modalCapabilitiesList"></ul>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title">Featured Initiatives &amp; Showcases</h4>
+          <div class="modal-showcase-grid" id="modalShowcaseGrid"></div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="btn btn-outline" id="modalPrevDoor">← Previous Door</button>
+        <button class="btn btn-primary" id="modalNextDoor">Next Door →</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 10. PROJECT INQUIRY & CONTACT MODAL                       -->
+  <!-- ========================================================= -->
+  <div id="contactModal" class="contact-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="contactBackdrop"></div>
+    <div class="contact-dialog">
+      <header class="contact-header">
+        <div>
+          <span class="modal-badge">START A CONVERSATION</span>
+          <h3 class="contact-title">Tell me what you're working on.</h3>
+          <p class="contact-subtitle">Whether it's business analysis, digital product strategy, or a creative collaboration.</p>
+        </div>
+        <button class="modal-close-btn" id="contactCloseBtn" aria-label="Close contact modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <form class="contact-form" id="inquiryForm" onsubmit="event.preventDefault(); window.handleInquirySubmit(this);">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="formName">Your Name</label>
+            <input type="text" id="formName" required placeholder="Jane Doe" />
+          </div>
+          <div class="form-group">
+            <label for="formEmail">Your Email</label>
+            <input type="email" id="formEmail" required placeholder="jane@example.com" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="formInterest">Area of Interest</label>
+          <select id="formInterest">
+            <option value="business">Business &amp; Financial Analysis</option>
+            <option value="web">Web &amp; Digital Product Development</option>
+            <option value="venture">Entrepreneurial / Project Collaboration</option>
+            <option value="creative">Creative &amp; Visual Media</option>
+            <option value="other">General Conversation / Coffee Chat</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="formMessage">Message / Project Brief</label>
+          <textarea id="formMessage" rows="4" required placeholder="Tell me a bit about what you have in mind..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-block" id="formSubmitBtn">
+            <span>Send Message</span>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div id="formSuccessNotice" class="form-success" style="display:none;">
+          ✓ Thank you! Your message has been prepared in your default mail app, or feel free to reach out directly at <strong>your.email@example.com</strong>.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
