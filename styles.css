@@ -1179,23 +1179,355 @@ html[data-mode="dark"] .door-cursor {
 }
 .door-cursor.on { opacity: 1; }
 
-/* Mobile View for Doors */
+/* ==========================================================================
+   MOBILE & SMARTPHONE OPTIMIZATION (< 640px)
+   Authentic therishithakor.com Horizontal Swipe Doors + Comprehensive Mobile Styles
+   ========================================================================== */
 @media (max-width: 639.98px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* ---------- Header & Navigation ---------- */
+  .hdr {
+    height: 3.75rem;
+  }
+  .hdr__in {
+    padding-inline: 1rem;
+  }
+  .brand__name {
+    font-size: .95rem;
+  }
+  .hdr__right {
+    margin-right: 2.4rem;
+  }
+  .btn-connect {
+    padding: .45rem .85rem;
+    font-size: .78rem;
+  }
+  .btn-connect svg {
+    display: none;
+  }
+  .cord-wrap {
+    right: .75rem;
+    top: 0;
+  }
+
+  /* ---------- Hero Section ---------- */
+  .hero {
+    min-height: auto;
+    padding-top: 4.25rem;
+    padding-bottom: 1.5rem;
+  }
+  .hero__content {
+    padding-top: 1.25rem;
+    max-width: 100%;
+  }
+  .eyebrow {
+    font-size: .75rem;
+    margin-bottom: .65rem;
+    letter-spacing: .08em;
+  }
+  .h1 {
+    font-size: clamp(1.95rem, 8vw, 2.65rem);
+    line-height: 1.1;
+    margin-bottom: 1.35rem;
+    word-break: break-word;
+  }
+  .cal-line {
+    display: inline-block;
+    margin-left: 0;
+    margin-top: .25rem;
+  }
+  .cal__body {
+    height: 1.25em;
+    padding: 0 .45em;
+  }
+  .cal__word {
+    font-size: .88em;
+  }
+  .hero__lead {
+    font-size: .925rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+  .ctas {
+    gap: .75rem;
+  }
+  .ctas .pill {
+    width: 100%;
+    justify-content: center;
+    padding: .8rem 1.25rem;
+    font-size: .9rem;
+  }
+  .fig {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(88vw, 19rem);
+    height: clamp(19rem, 46vh, 23rem);
+    margin: 1.75rem auto 0;
+  }
+  .fig__card {
+    padding: .5rem 1rem;
+    font-size: .78rem;
+    bottom: 1rem;
+    white-space: nowrap;
+  }
+  .hero__bar {
+    padding-block: 1rem;
+    margin-top: 1.5rem;
+  }
+  .hero__bar-in {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+    font-size: .78rem;
+  }
+
+  /* ---------- The 3D Doors Wall (Swipeable Carousel) ---------- */
   .doors {
     padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: hidden;
+  }
+  .doors__wall {
+    gap: .75rem;
+    align-items: stretch;
+    padding-inline: .75rem;
+  }
+  .paint {
+    font-size: 2.15rem;
+    text-align: center;
+    max-width: none;
+    margin: 0 auto .25rem;
+    line-height: 1.05;
+  }
+  .doors__hint {
+    display: block;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .6rem;
+  }
+  .doors__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .45rem;
+    margin-bottom: 1.25rem;
+  }
+  .doors__dots i {
+    cursor: pointer;
+    width: .45rem;
+    height: .45rem;
+    border-radius: 999px;
+    background: rgba(140, 130, 120, .35);
+    transition: width .35s cubic-bezier(.16, 1, .3, 1), background-color .35s;
+  }
+  .doors__dots i.on {
+    width: 1.35rem;
+    background: var(--foreground);
   }
   .doors__row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    --uw: clamp(210px, 66vw, 260px);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-inline: calc(50% - var(--uw) / 2);
+    width: 100%;
+    padding-top: .75rem;
+    padding-bottom: 1.75rem;
+    margin: 0;
+    scrollbar-width: none;
+  }
+  .doors__row::-webkit-scrollbar { display: none; }
+  .doors__row::after {
+    left: -100vw;
+    right: -100vw;
+    width: 300vw;
+  }
+  .unit {
+    flex: 0 0 var(--uw);
+    width: var(--uw);
+    max-width: none;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  /* On mobile, open the active door */
+  .doors.focus .unit:not(.on) .doorway {
+    opacity: .35;
+    filter: saturate(.5);
+  }
+  .unit.on .door {
+    transform: rotateY(38deg);
   }
   .dinfo {
-    position: static;
+    position: relative;
+    left: auto !important;
+    top: auto !important;
     width: 100% !important;
     max-width: 100%;
     margin-top: 1rem;
+    padding: 1.35rem 1.15rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card-sm);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
     opacity: 1;
     transform: none;
     display: block;
+  }
+  .dinfo .dinfo__h { font-size: 1.35rem; line-height: 1.15; margin-bottom: .3rem; }
+  .dinfo .dinfo__t { margin-bottom: .75rem; font-size: .6875rem; letter-spacing: .08em; line-height: 1.35; }
+  .dinfo .dinfo__p { font-size: .875rem; line-height: 1.4; gap: .5rem; }
+  .dinfo .dinfo__p li { gap: .6rem; }
+  .dinfo .dinfo__p li::before { width: .95rem; height: .95rem; }
+  .doors__floor { height: 3.5rem; }
+
+  /* ---------- Story / Timeline Section ---------- */
+  .story {
+    padding-block: 3.5rem;
+  }
+  .story__wrap {
+    gap: 2rem;
+  }
+  .story__title {
+    font-size: 1.85rem;
+    margin-bottom: 1.25rem;
+  }
+  .odometer {
+    font-size: 3.25rem;
+    margin-bottom: .75rem;
+  }
+  .story__meta {
+    font-size: .78rem;
+    gap: .75rem;
+    margin-bottom: 1rem;
+  }
+  .ch {
+    padding: 1.5rem 1.25rem;
+  }
+  .ch__title {
+    font-size: 1.25rem;
+  }
+  .ch__desc {
+    font-size: .88rem;
+  }
+  .ch__tags {
+    gap: .35rem;
+  }
+
+  /* ---------- Tribute to Mom Card ---------- */
+  .mom-tribute {
+    padding-block: 2rem .5rem;
+  }
+  .tribute-box {
+    padding: 1.75rem 1.15rem;
+  }
+  .tribute-quote {
+    font-size: 1.15rem;
+    line-height: 1.45;
+  }
+  .tribute-note {
+    font-size: .82rem;
+  }
+
+  /* ---------- Giant Name Footer ---------- */
+  .sf {
+    padding-top: 3rem;
+  }
+  .sf__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .sf__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: .78rem;
+  }
+  .sf__word {
+    font-size: clamp(2.35rem, 11vw, 3.75rem) !important;
+    letter-spacing: -.02em;
+    padding-bottom: 1rem;
+  }
+
+  /* ---------- Modals & Showcases ---------- */
+  .modal-overlay {
+    padding: .5rem;
+    align-items: flex-end;
+  }
+  .modal-dialog {
+    max-height: 92vh;
+    border-radius: 1.25rem 1.25rem 0 0;
+    padding: 1.5rem 1.15rem;
+    width: 100%;
+  }
+  .modal-header {
+    flex-direction: column;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+  }
+  .modal-title {
+    font-size: 1.35rem;
+  }
+  .infographic-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+  }
+  .info-stat {
+    padding: .65rem .75rem;
+  }
+  .info-stat-num {
+    font-size: 1.2rem;
+  }
+  .info-stat-lbl {
+    font-size: .68rem;
+  }
+  .flow-infographic {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+    padding: .85rem;
+  }
+  .sc-card {
+    border-radius: 10px;
+  }
+  .sc-body {
+    padding: 1.15rem;
+  }
+  .sc-title {
+    font-size: 1.1rem;
+  }
+  .sc-desc {
+    font-size: .85rem;
+  }
+
+  /* ---------- Contact Modal ---------- */
+  .contact-dialog {
+    width: 100%;
+    max-height: 94vh;
+    border-radius: 1.25rem 1.25rem 0 0;
+    padding: 1.5rem 1.15rem;
+  }
+  .contact-links-grid {
+    flex-direction: column;
+    gap: .65rem;
+  }
+  .contact-pill-link {
+    width: 100%;
   }
 }
 

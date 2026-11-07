@@ -385,8 +385,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (secDoors) {
     secDoors.addEventListener('pointerleave', () => {
-      showDoorFocus(-1);
+      if (window.innerWidth > 640) {
+        showDoorFocus(-1);
+      }
     });
+  }
+
+  // =========================================================================
+  // 5C. MOBILE SWIPE CAROUSEL & DOTS SYNCHRONIZATION
+  // =========================================================================
+  const doorsRow = secDoors?.querySelector('.doors__row');
+  const dots = secDoors ? [...secDoors.querySelectorAll('.doors__dots i')] : [];
+
+  const updateMobileDoor = (idx) => {
+    units.forEach((u, k) => u.classList.toggle('on', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('on', k === idx));
+    setWallInfo(idx);
+  };
+
+  if (doorsRow && dots.length) {
+    let scrollTimeout;
+    doorsRow.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (window.innerWidth <= 640) {
+          const center = doorsRow.scrollLeft + doorsRow.clientWidth / 2;
+          let closestIdx = 0;
+          let minDiff = Infinity;
+          units.forEach((u, idx) => {
+            const uCenter = u.offsetLeft + u.offsetWidth / 2;
+            const diff = Math.abs(center - uCenter);
+            if (diff < minDiff) {
+              minDiff = diff;
+              closestIdx = idx;
+            }
+          });
+          updateMobileDoor(closestIdx);
+        }
+      }, 40);
+    }, { passive: true });
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        const u = units[idx];
+        if (u) {
+          const targetScroll = u.offsetLeft - (doorsRow.clientWidth - u.offsetWidth) / 2;
+          doorsRow.scrollTo({ left: targetScroll, behavior: 'smooth' });
+          updateMobileDoor(idx);
+        }
+      });
+    });
+
+    // Initial state on mobile
+    if (window.innerWidth <= 640) {
+      updateMobileDoor(0);
+    }
   }
 
   // Also update WALL_INFO with matching checkmark descriptions
