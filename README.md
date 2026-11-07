@@ -1,6 +1,6 @@
 # JayrajSinh (Jay) — Personal Portfolio Website
 
-A bespoke, high-performance portfolio website crafted with inspiration from the design language and micro-interactions of [therishithakor.com](https://therishithakor.com).
+A bespoke, high-performance portfolio website crafted.
 
 ## 🚀 Key Features
 
