@@ -1563,6 +1563,14 @@ html[data-mode="dark"] .door-cursor {
   .story__wrap {
     gap: 2rem;
   }
+  .story__list {
+    padding-left: 1.65rem;
+    gap: 1.75rem;
+  }
+  .ch__node {
+    left: -2.15rem;
+    top: 2rem;
+  }
   .story__title {
     font-size: 1.85rem;
     margin-bottom: 1.25rem;
@@ -1754,10 +1762,16 @@ html[data-mode="dark"] .door-cursor {
   color: var(--foreground);
   margin-bottom: 1.25rem;
   line-height: .9;
+  height: 1.05em;
+  overflow: hidden;
 }
 .odometer-digit {
-  display: inline-block;
-  transition: transform .4s var(--e-spring), opacity .3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.05em;
+  transition: transform .32s cubic-bezier(.16, 1, .3, 1), opacity .22s ease;
+  will-change: transform, opacity;
 }
 .story__meta {
   display: flex;
@@ -1782,23 +1796,57 @@ html[data-mode="dark"] .door-cursor {
   transition: width .3s ease-out;
 }
 
-/* Timeline Cards */
+/* Timeline Cards & Animated Track */
 .story__list {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2.5rem;
+  padding-left: 2rem;
 }
+.story__list::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2rem;
+  bottom: 2rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-warm) 0%, var(--line) 30%, var(--line) 80%, transparent 100%);
+  border-radius: 2px;
+}
+.story__beam {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 8px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  box-shadow: 0 0 12px var(--accent-warm), 0 0 24px rgba(140, 98, 57, .6);
+  pointer-events: none;
+  transition: transform .45s cubic-bezier(.16, 1, .3, 1), opacity .3s ease;
+  z-index: 3;
+}
+
 .ch {
+  position: relative;
   background: var(--glass-bg-card);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--glass-border-subtle);
   border-radius: var(--radius-card-sm);
   padding: 2.25rem 2rem;
   -webkit-backdrop-filter: var(--glass-blur-md) saturate(180%);
   backdrop-filter: var(--glass-blur-md) saturate(180%);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06), var(--glass-specular);
-  position: relative;
-  overflow: hidden;
-  transition: transform .35s var(--e-spring), border-color .3s ease, box-shadow .35s var(--e-spring), background-color .3s ease;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05), var(--glass-specular-soft);
+  opacity: 0.52;
+  transform: scale(0.97) translateY(18px);
+  filter: blur(1px);
+  transition: opacity .55s cubic-bezier(.16, 1, .3, 1),
+              transform .55s cubic-bezier(.16, 1, .3, 1),
+              filter .55s cubic-bezier(.16, 1, .3, 1),
+              border-color .35s ease,
+              box-shadow .45s cubic-bezier(.16, 1, .3, 1),
+              background-color .35s ease;
+  will-change: transform, opacity;
 }
 .ch::before {
   content: "";
@@ -1807,22 +1855,52 @@ html[data-mode="dark"] .door-cursor {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
   pointer-events: none;
+  transition: background .35s ease;
 }
 html[data-mode="dark"] .ch::before {
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
 }
-.ch:hover {
-  transform: translateY(-3px);
-  background: var(--glass-bg-elevated);
-  border-color: var(--glass-border);
-  box-shadow: var(--glass-shadow-md), var(--glass-specular);
+
+.ch__node {
+  position: absolute;
+  left: -2.625rem;
+  top: 2.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 2px solid var(--background);
+  box-shadow: 0 0 0 1px var(--line);
+  transition: transform .4s cubic-bezier(.16, 1, .3, 1), background-color .3s, box-shadow .3s;
+  z-index: 2;
 }
+
 .ch.on {
+  opacity: 1;
+  transform: scale(1.02) translateY(0);
+  filter: blur(0);
   border-color: var(--accent-warm);
   background: var(--glass-bg-elevated);
-  box-shadow: var(--glass-shadow-md), var(--glass-specular);
+  box-shadow: 0 20px 48px -10px rgba(140, 98, 57, 0.2),
+              0 0 0 1px rgba(140, 98, 57, 0.45),
+              var(--glass-specular);
+}
+.ch.on::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 215, 170, 0.95) 50%, transparent 100%);
+}
+.ch.on .ch__node {
+  transform: scale(1.4);
+  background: var(--accent-warm);
+  box-shadow: 0 0 0 2px var(--background), 0 0 16px var(--accent-warm);
+}
+.ch:hover {
+  opacity: 1;
+  transform: scale(1.02) translateY(-2px);
+  filter: blur(0);
+  background: var(--glass-bg-elevated);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1), var(--glass-specular);
 }
 .ch__badge {
   font-family: var(--font-mono);

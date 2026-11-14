@@ -580,48 +580,93 @@ document.addEventListener('DOMContentLoaded', () => {
   const storyCount = document.getElementById('storyCount');
   const storyWhen = document.getElementById('storyWhen');
   const storyBarFill = document.getElementById('storyBarFill');
+  const storyBeam = document.getElementById('storyBeam');
+  const storyList = document.getElementById('storyList');
   const chapters = document.querySelectorAll('.ch');
 
   let currentYearStr = '2026';
 
   const rollYear = (yStr) => {
     if (yStr === currentYearStr) return;
+    const oldYear = currentYearStr;
     currentYearStr = yStr;
     const chars = yStr.split('');
+    const oldChars = oldYear.split('');
+
     chars.forEach((c, idx) => {
-      if (odoDigits[idx]) {
-        odoDigits[idx].style.opacity = '0';
-        odoDigits[idx].style.transform = 'translateY(-12px)';
+      const el = odoDigits[idx];
+      if (el && c !== oldChars[idx]) {
+        el.style.transform = 'translateY(-24px)';
+        el.style.opacity = '0';
         setTimeout(() => {
-          odoDigits[idx].textContent = c;
-          odoDigits[idx].style.opacity = '1';
-          odoDigits[idx].style.transform = 'translateY(0)';
-        }, 120);
+          el.textContent = c;
+          el.style.transform = 'translateY(24px)';
+          requestAnimationFrame(() => {
+            el.style.transform = 'translateY(0)';
+            el.style.opacity = '1';
+          });
+        }, 160);
       }
     });
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        chapters.forEach(c => c.classList.remove('on'));
-        entry.target.classList.add('on');
+  const updateActiveChapter = (target) => {
+    chapters.forEach(c => c.classList.remove('on'));
+    target.classList.add('on');
 
-        const y = entry.target.dataset.year;
-        const w = entry.target.dataset.when;
-        const i = parseInt(entry.target.dataset.index, 10);
+    const y = target.dataset.year;
+    const w = target.dataset.when;
+    const i = parseInt(target.dataset.index, 10);
 
-        rollYear(y);
-        if (storyCount) storyCount.textContent = `0${i} / 06`;
-        if (storyWhen) storyWhen.textContent = w;
-        if (storyBarFill) storyBarFill.style.width = `${(i / 6) * 100}%`;
+    rollYear(y);
+    if (storyCount) storyCount.textContent = `0${i} / 06`;
+    if (storyWhen) storyWhen.textContent = w;
+    if (storyBarFill) storyBarFill.style.width = `${(i / 6) * 100}%`;
+
+    if (storyBeam && storyList) {
+      const cardTop = target.offsetTop;
+      storyBeam.style.transform = `translateY(${cardTop + 36}px)`;
+    }
+  };
+
+  // Scroll spy with center-band focal point for buttery chapter transitions
+  const updateStoryScroll = () => {
+    const vhCenter = window.innerHeight * 0.44;
+    let closestCard = null;
+    let minDistance = Infinity;
+
+    chapters.forEach(ch => {
+      const rect = ch.getBoundingClientRect();
+      const cardCenter = rect.top + rect.height * 0.5;
+      const dist = Math.abs(vhCenter - cardCenter);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestCard = ch;
       }
     });
-  }, { rootMargin: '-25% 0px -40% 0px' });
 
-  chapters.forEach(ch => observer.observe(ch));
+    if (closestCard && !closestCard.classList.contains('on')) {
+      updateActiveChapter(closestCard);
+    }
+  };
 
-  // Canvas Dial Particles
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        updateStoryScroll();
+        scrollTicking = false;
+      });
+    }
+  }, { passive: true });
+
+  // Initial state on load
+  if (chapters.length > 0) {
+    updateActiveChapter(chapters[0]);
+  }
+
+  // Canvas Astronomical Time Machine Dials & 3D Stardust Vortex
   if (cv) {
     const ctx = cv.getContext('2d');
     let W = 0, H = 0;
@@ -634,45 +679,83 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     window.addEventListener('resize', resize);
 
-    const dust = Array.from({ length: 40 }, () => ({
-      x: Math.random() * 800 - 400,
-      y: Math.random() * 800 - 400,
-      size: Math.random() * 2 + 1
+    const dust = Array.from({ length: 48 }, () => ({
+      x: (Math.random() - 0.5) * 800,
+      y: (Math.random() - 0.5) * 800,
+      z: Math.random() * 600 + 100,
+      size: Math.random() * 2 + 1,
+      speed: Math.random() * 0.7 + 0.3
     }));
 
-    let progress = 0;
-    window.addEventListener('scroll', () => {
-      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
-      progress = window.scrollY / (scrollMax || 1);
-    }, { passive: true });
+    let targetAngle = 0;
+    let smoothAngle = 0;
 
     const loop = () => {
       ctx.clearRect(0, 0, W, H);
       const isDark = root.getAttribute('data-mode') === 'dark';
-      const col = isDark ? '232, 228, 224' : '26, 24, 24';
+      const col = isDark ? '232, 228, 224' : '140, 98, 57';
 
-      const cx = W / 2, cy = H / 2;
-      const angle = progress * Math.PI * 3;
-
-      for (let r = 1; r <= 3; r++) {
-        const rad = (r * 140 + progress * 240) % 520;
-        ctx.beginPath();
-        ctx.arc(cx, cy, rad, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(${col}, ${(0.04 * (1 - rad / 520)).toFixed(3)})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
+      const storySec = document.getElementById('story');
+      let progress = 0;
+      if (storySec) {
+        const rect = storySec.getBoundingClientRect();
+        const total = rect.height + window.innerHeight;
+        progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (total || 1)));
       }
 
-      dust.forEach(d => {
-        const dist = Math.sqrt(d.x * d.x + d.y * d.y);
-        const a = Math.atan2(d.y, d.x) + angle * 0.15;
-        const curX = cx + Math.cos(a) * (dist * 0.85);
-        const curY = cy + Math.sin(a) * (dist * 0.85);
+      targetAngle = progress * Math.PI * 4;
+      smoothAngle += (targetAngle - smoothAngle) * 0.08;
 
-        ctx.fillStyle = `rgba(${col}, 0.12)`;
+      const cx = W > 960 ? W * 0.22 : W * 0.5;
+      const cy = H * 0.45;
+
+      // Draw Rotating Astronomical Clock Gears & Concentric Rings
+      const rings = [
+        { rad: 130, speed: 1.0, ticks: 12 },
+        { rad: 230, speed: -0.65, ticks: 24 },
+        { rad: 350, speed: 0.4, ticks: 36 }
+      ];
+
+      rings.forEach(ring => {
+        const rAngle = smoothAngle * ring.speed;
         ctx.beginPath();
-        ctx.arc(curX, curY, d.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.arc(cx, cy, ring.rad, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${col}, ${isDark ? '0.07' : '0.09'})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        for (let t = 0; t < ring.ticks; t++) {
+          const a = rAngle + (t / ring.ticks) * Math.PI * 2;
+          const x1 = cx + Math.cos(a) * (ring.rad - 6);
+          const y1 = cy + Math.sin(a) * (ring.rad - 6);
+          const x2 = cx + Math.cos(a) * (ring.rad + 6);
+          const y2 = cy + Math.sin(a) * (ring.rad + 6);
+
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.strokeStyle = `rgba(${col}, ${isDark ? '0.12' : '0.15'})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
+
+      // Ambient Floating Stardust Tunnel
+      dust.forEach(d => {
+        d.z -= d.speed * (1 + Math.abs(targetAngle - smoothAngle) * 2.5);
+        if (d.z <= 10) d.z = 700;
+
+        const k = 300 / d.z;
+        const px = cx + d.x * k;
+        const py = cy + d.y * k;
+        const alpha = Math.min(1, (700 - d.z) / 400) * (isDark ? 0.22 : 0.16);
+
+        if (px >= 0 && px <= W && py >= 0 && py <= H) {
+          ctx.fillStyle = `rgba(${col}, ${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(px, py, d.size * k * 0.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
       });
 
       requestAnimationFrame(loop);
