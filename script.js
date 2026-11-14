@@ -332,6 +332,11 @@ document.addEventListener('DOMContentLoaded', () => {
       secDoors?.classList.remove('focus');
       units.forEach(u => u.classList.remove('on'));
       dinfo?.classList.remove('on');
+      if (dinfo) {
+        dinfo.style.width = '';
+        dinfo.style.left = '';
+        dinfo.style.top = '';
+      }
       return;
     }
 
@@ -356,6 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
       dinfo.style.width = w + 'px';
       dinfo.style.left = (left - wr.left + (right - left - w) / 2) + 'px';
       dinfo.style.top = (r.top - wr.top + r.height * 0.44 - dinfo.offsetHeight / 2) + 'px';
+    } else {
+      dinfo.style.width = '';
+      dinfo.style.left = '';
+      dinfo.style.top = '';
     }
 
     dinfo.classList.add('on');
@@ -735,5 +744,12 @@ document.addEventListener('DOMContentLoaded', () => {
     sfWord.style.fontSize = size.toFixed(1) + 'px';
   };
   fitWord();
-  window.addEventListener('resize', fitWord);
+  window.addEventListener('resize', () => {
+    fitWord();
+    if (window.innerWidth <= 640 && dinfo) {
+      dinfo.style.width = '';
+      dinfo.style.left = '';
+      dinfo.style.top = '';
+    }
+  });
 });

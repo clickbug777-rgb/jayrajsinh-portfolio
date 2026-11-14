@@ -47,6 +47,23 @@
   --room-sh: rgba(0, 0, 0, .6);
   --glow: 255, 220, 180;
   
+  /* MotionSites Liquid Glass & Frosted Tokens (Light Mode) */
+  --glass-bg: rgba(255, 255, 255, .58);
+  --glass-bg-subtle: rgba(255, 255, 255, .32);
+  --glass-bg-elevated: rgba(255, 255, 255, .78);
+  --glass-bg-card: rgba(246, 242, 238, .68);
+  --glass-border: rgba(255, 255, 255, .65);
+  --glass-border-subtle: rgba(196, 176, 176, .35);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, .75);
+  --glass-specular-soft: inset 0 1px 0 0 rgba(255, 255, 255, .45);
+  --glass-blur-sm: blur(8px);
+  --glass-blur-md: blur(16px);
+  --glass-blur-lg: blur(28px);
+  --glass-shadow-sm: 0 4px 16px rgba(0, 0, 0, .05);
+  --glass-shadow-md: 0 12px 32px rgba(0, 0, 0, .08);
+  --glass-shadow-lg: 0 24px 56px rgba(0, 0, 0, .14);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-out-quint: cubic-bezier(.22, 1, .36, 1);
   color-scheme: light;
 }
 
@@ -74,6 +91,21 @@ html[data-mode="dark"] {
   --room-sh: rgba(0, 0, 0, .85);
   --glow: 232, 228, 224;
   
+  /* MotionSites Liquid Glass & Frosted Tokens (Dark Mode) */
+  --glass-bg: rgba(26, 24, 24, .62);
+  --glass-bg-subtle: rgba(255, 255, 255, .05);
+  --glass-bg-elevated: rgba(34, 30, 30, .82);
+  --glass-bg-card: rgba(30, 26, 26, .72);
+  --glass-border: rgba(255, 255, 255, .15);
+  --glass-border-subtle: rgba(255, 255, 255, .08);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, .2);
+  --glass-specular-soft: inset 0 1px 0 0 rgba(255, 255, 255, .12);
+  --glass-blur-sm: blur(8px);
+  --glass-blur-md: blur(16px);
+  --glass-blur-lg: blur(28px);
+  --glass-shadow-sm: 0 4px 16px rgba(0, 0, 0, .35);
+  --glass-shadow-md: 0 12px 36px rgba(0, 0, 0, .52);
+  --glass-shadow-lg: 0 28px 64px rgba(0, 0, 0, .7);
   color-scheme: dark;
 }
 
@@ -106,11 +138,11 @@ svg { display: block; width: 1em; height: 1em; flex: none; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tnum { font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
 
-/* ---------- Adaptive rem grid ---------- */
-@media (max-width: 1920px) { html { font-size: .833333vw; } }
-@media (max-width: 1440px) { html { font-size: 1.111111vw; } }
-@media (max-width: 1024px) { html { font-size: 1.5625vw; } }
-@media (max-width: 640px) { html { font-size: 4.444444vw; } }
+/* ---------- Adaptive fluid rem grid ---------- */
+@media (max-width: 1920px) { html { font-size: clamp(14px, .833333vw, 16px); } }
+@media (max-width: 1440px) { html { font-size: clamp(14px, 1.111111vw, 16px); } }
+@media (max-width: 1024px) { html { font-size: clamp(14px, 1.5625vw, 16px); } }
+@media (max-width: 640px) { html { font-size: clamp(14px, 3.8vw, 16px); } }
 
 .shell {
   max-width: var(--container-shell);
@@ -319,6 +351,11 @@ body.ready .line > span { transform: none; opacity: 1; }
   height: var(--bar-h);
   display: flex;
   align-items: center;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  backdrop-filter: var(--glass-blur-md);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 .hdr__in {
   display: flex;
@@ -352,11 +389,14 @@ body.ready .line > span { transform: none; opacity: 1; }
   gap: 1.8rem;
   padding: .45rem 1.4rem;
   border-radius: var(--radius-pill);
-  background: var(--chip-bg);
-  border: 1px solid var(--chip-line);
-  backdrop-filter: blur(14px);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular-soft);
   font-size: .875rem;
   font-weight: 500;
+  transition: background-color .25s ease, border-color .25s ease;
 }
 @media (min-width: 820px) { .hdr__nav { display: flex; } }
 .hdr__nav a { color: var(--muted); transition: color .2s ease; }
@@ -373,8 +413,11 @@ body.ready .line > span { transform: none; opacity: 1; }
   gap: .5rem;
   padding: .35rem .85rem;
   border-radius: var(--radius-pill);
-  background: var(--chip-bg);
-  border: 1px solid var(--chip-line);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular-soft);
   font-size: .8rem;
   font-weight: 500;
 }
@@ -403,7 +446,11 @@ body.ready .line > span { transform: none; opacity: 1; }
   flex-direction: column;
   justify-content: space-between;
   padding-top: var(--bar-h);
-  background: radial-gradient(42% 65% at 85% 55%, rgba(140, 98, 57, .12), transparent 75%), var(--background);
+  background:
+    radial-gradient(45% 65% at 85% 45%, rgba(140, 98, 57, .18), transparent 75%),
+    radial-gradient(35% 50% at 15% 30%, rgba(107, 92, 92, .12), transparent 70%),
+    radial-gradient(55% 55% at 50% 90%, rgba(200, 160, 120, .14), transparent 80%),
+    var(--background);
   overflow: hidden;
 }
 .hero__stage {
@@ -493,23 +540,25 @@ body.ready .line > span { transform: none; opacity: 1; }
   gap: .5rem;
   padding: .65rem 1.35rem;
   border-radius: var(--radius-pill);
-  background: rgba(26, 24, 24, .82);
-  color: #E8E4E0;
+  background: var(--glass-bg-elevated);
+  color: var(--foreground);
   font-size: .85rem;
   font-weight: 600;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, .15);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
-  transition: transform .25s var(--e-spring), background-color .25s;
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  backdrop-filter: var(--glass-blur-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-md), var(--glass-specular);
+  transition: transform .25s var(--e-spring), background-color .25s, box-shadow .25s, border-color .25s;
 }
 .fig__card:hover {
   transform: translateX(-50%) translateY(-2px) scale(1.03);
-  background: #1A1818;
+  box-shadow: var(--glass-shadow-lg), var(--glass-specular);
+  border-color: var(--accent-warm);
 }
 html[data-mode="dark"] .fig__card {
-  background: rgba(232, 228, 224, .88);
-  color: #1A1818;
-  border: 1px solid rgba(0, 0, 0, .15);
+  background: var(--glass-bg-elevated);
+  color: var(--foreground);
+  border: 1px solid var(--glass-border);
 }
 
 .hero__content {
@@ -556,12 +605,13 @@ html[data-mode="dark"] .fig__card {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 1.2em;
-  padding: 0 .55em;
+  height: 1.25em;
+  padding: 0 .6em;
   background: var(--foreground);
   color: var(--background);
-  border-radius: .3em;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+  border-radius: .35em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .22), inset 0 1px 1px rgba(255, 255, 255, .35);
+  border: 1px solid rgba(255, 255, 255, .15);
   overflow: hidden;
 }
 .cal__word {
@@ -597,12 +647,17 @@ html[data-mode="dark"] .fig__card {
 }
 .pill--dark:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, .2); }
 .pill--outline {
-  border: 1px solid var(--line);
+  background: var(--glass-bg-subtle);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  border: 1px solid var(--glass-border-subtle);
+  box-shadow: var(--glass-specular-soft);
   color: var(--foreground);
 }
 .pill--outline:hover {
-  background: var(--chip-bg-h);
+  background: var(--glass-bg-elevated);
   border-color: var(--foreground);
+  box-shadow: var(--glass-shadow-sm), var(--glass-specular);
 }
 .pill__badge {
   width: 22px;
@@ -682,6 +737,11 @@ html[data-mode="dark"] {
   --dinfo-accent: #D9C6C6;
 }
 
+.doors__pin {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
 .doors {
   position: relative;
   z-index: 1;
@@ -807,6 +867,13 @@ html[data-mode="dark"] .doors__row::after {
   transform: translateY(.6rem);
   transition: opacity .35s ease, transform .5s var(--e-soft);
   max-width: 25rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--glass-bg-card);
+  -webkit-backdrop-filter: var(--glass-blur-md) saturate(180%);
+  backdrop-filter: var(--glass-blur-md) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card-sm);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .09), var(--glass-specular);
 }
 .dinfo.on {
   opacity: 1;
@@ -1472,10 +1539,12 @@ html[data-mode="dark"] .door-cursor {
     max-width: 100%;
     margin-top: .5rem;
     padding: 1.35rem 1.15rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
+    background: var(--glass-bg-card);
+    -webkit-backdrop-filter: var(--glass-blur-md);
+    backdrop-filter: var(--glass-blur-md);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-card-sm);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+    box-shadow: var(--glass-shadow-md), var(--glass-specular);
     opacity: 1 !important;
     transform: none !important;
     display: block !important;
@@ -1631,6 +1700,10 @@ html[data-mode="dark"] .door-cursor {
   position: relative;
   padding-block: clamp(4.5rem, 9vw, 8rem);
   overflow: hidden;
+  background:
+    radial-gradient(50% 50% at 10% 25%, rgba(140, 98, 57, .14), transparent 75%),
+    radial-gradient(40% 60% at 90% 75%, rgba(107, 92, 92, .12), transparent 70%),
+    var(--background);
 }
 .story__bg {
   position: absolute;
@@ -1716,15 +1789,40 @@ html[data-mode="dark"] .door-cursor {
   gap: 1.75rem;
 }
 .ch {
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--glass-bg-card);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-card-sm);
   padding: 2.25rem 2rem;
-  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  -webkit-backdrop-filter: var(--glass-blur-md) saturate(180%);
+  backdrop-filter: var(--glass-blur-md) saturate(180%);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06), var(--glass-specular);
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s var(--e-spring), border-color .3s ease, box-shadow .35s var(--e-spring), background-color .3s ease;
+}
+.ch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+  pointer-events: none;
+}
+html[data-mode="dark"] .ch::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+}
+.ch:hover {
+  transform: translateY(-3px);
+  background: var(--glass-bg-elevated);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow-md), var(--glass-specular);
 }
 .ch.on {
   border-color: var(--accent-warm);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, .08);
+  background: var(--glass-bg-elevated);
+  box-shadow: var(--glass-shadow-md), var(--glass-specular);
 }
 .ch__badge {
   font-family: var(--font-mono);
@@ -1768,15 +1866,24 @@ html[data-mode="dark"] .door-cursor {
   border-top: 1px dashed var(--line);
 }
 .ch__tags span, .ch__tags a {
+  display: inline-flex;
+  align-items: center;
   font-size: .75rem;
   font-family: var(--font-mono);
-  padding: .25rem .6rem;
-  border-radius: 4px;
-  background: var(--background);
-  border: 1px solid var(--line);
-  color: var(--muted);
+  padding: .3rem .65rem;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: var(--foreground);
+  transition: background-color .2s, border-color .2s, transform .2s;
 }
-.ch__tags a:hover { color: var(--foreground); border-color: var(--foreground); }
+.ch__tags a:hover {
+  background: var(--glass-bg-elevated);
+  border-color: var(--accent-warm);
+  transform: translateY(-1px);
+}
 
 /* ==========================================================================
    7. VISUAL PROJECT SHOWCASE DRAWER & INFOGRAPHICS
@@ -1797,8 +1904,9 @@ html[data-mode="dark"] .door-cursor {
 .modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(10, 8, 8, .72);
-  backdrop-filter: blur(10px);
+  background: rgba(10, 8, 8, .68);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 .modal-dialog {
   position: relative;
@@ -1807,11 +1915,13 @@ html[data-mode="dark"] .door-cursor {
   max-width: 760px;
   max-height: 90vh;
   overflow-y: auto;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-card);
   padding: clamp(1.75rem, 4vw, 2.75rem);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, .35);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  backdrop-filter: var(--glass-blur-lg);
+  box-shadow: var(--glass-shadow-lg), var(--glass-specular);
   transform: translateY(24px) scale(.97);
   transition: transform .4s var(--e-spring);
 }
@@ -1877,11 +1987,14 @@ html[data-mode="dark"] .door-cursor {
   margin-bottom: 2rem;
 }
 .info-stat {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-control);
   padding: .85rem 1rem;
   text-align: left;
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular-soft);
 }
 .info-stat-num {
   font-family: var(--font-mono);
@@ -1903,11 +2016,14 @@ html[data-mode="dark"] .door-cursor {
   align-items: center;
   justify-content: space-between;
   gap: .5rem;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-control);
   padding: 1rem;
   margin-bottom: 1.5rem;
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular-soft);
 }
 @media (max-width: 600px) {
   .flow-infographic { flex-direction: column; align-items: flex-start; }
@@ -2040,11 +2156,13 @@ html[data-mode="dark"] .door-cursor {
   z-index: 2;
   width: 100%;
   max-width: 440px;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-card);
   padding: 1.85rem;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, .4);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  backdrop-filter: var(--glass-blur-lg);
+  box-shadow: var(--glass-shadow-lg), var(--glass-specular);
   transform: translateY(20px) scale(.97);
   transition: transform .4s var(--e-spring);
 }
@@ -2110,15 +2228,29 @@ html[data-mode="dark"] .door-cursor {
    ========================================================================== */
 .mom-tribute {
   padding-block: 2.5rem 1rem;
+  background: radial-gradient(60% 80% at 50% 50%, rgba(200, 140, 80, .14), transparent 70%);
 }
 .tribute-box {
-  background: linear-gradient(135deg, rgba(140, 98, 57, .12) 0%, rgba(107, 92, 92, .06) 100%), var(--surface);
-  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(200, 140, 80, .18) 0%, rgba(180, 110, 110, .10) 100%), var(--glass-bg-elevated);
+  border: 1px solid rgba(210, 160, 120, .45);
   border-radius: var(--radius-card-sm);
   padding: clamp(2rem, 4vw, 3rem);
   text-align: center;
   position: relative;
   overflow: hidden;
+  -webkit-backdrop-filter: var(--glass-blur-lg) saturate(190%);
+  backdrop-filter: var(--glass-blur-lg) saturate(190%);
+  box-shadow: 0 16px 45px rgba(180, 110, 80, .16), var(--glass-specular);
+}
+.tribute-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 170, 0.85), transparent);
+  pointer-events: none;
 }
 .tribute-icon {
   width: 44px;
@@ -2238,16 +2370,21 @@ html[data-mode="dark"] .door-cursor {
   gap: .65rem;
   padding: .75rem 1rem;
   border-radius: var(--radius-control);
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular-soft);
   font-size: .85rem;
   font-weight: 600;
   color: var(--foreground);
-  transition: transform .2s ease, border-color .2s;
+  transition: transform .25s var(--e-spring), border-color .2s, background-color .2s, box-shadow .25s;
 }
 .contact-pill-link:hover {
   transform: translateY(-2px);
-  border-color: var(--foreground);
+  background: var(--glass-bg-elevated);
+  border-color: var(--accent-warm);
+  box-shadow: var(--glass-shadow-sm), var(--glass-specular);
 }
 .form-grp {
   display: flex;
@@ -2264,11 +2401,18 @@ html[data-mode="dark"] .door-cursor {
   width: 100%;
   padding: .85rem 1rem;
   border-radius: var(--radius-control);
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
   color: var(--foreground);
   font-family: inherit;
   font-size: .9rem;
   outline: none;
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  backdrop-filter: var(--glass-blur-sm);
+  transition: border-color .2s, box-shadow .2s, background-color .2s;
 }
-.form-grp input:focus, .form-grp textarea:focus { border-color: var(--foreground); }
+.form-grp input:focus, .form-grp textarea:focus {
+  border-color: var(--accent-warm);
+  background: var(--glass-bg-elevated);
+  box-shadow: 0 0 0 3px rgba(140, 98, 57, .18);
+}
