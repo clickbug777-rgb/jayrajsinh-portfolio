@@ -823,23 +823,28 @@ html[data-mode="dark"] .avatar-3d__shadow {
     height: clamp(20rem, 50vh, 26rem);
     margin: 0 auto;
   }
+  .avatar-3d__bubble {
+    top: -0.25rem;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.85rem;
+  }
   .avatar-3d__chip.chip--top {
-    top: 8%;
+    top: 14%;
     right: -0.25rem;
-    font-size: 0.7rem;
-    padding: 0.35rem 0.65rem;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.6rem;
   }
   .avatar-3d__chip.chip--mid {
-    top: 44%;
-    left: -0.5rem;
-    font-size: 0.7rem;
-    padding: 0.35rem 0.65rem;
+    top: 48%;
+    left: -0.25rem;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.6rem;
   }
   .avatar-3d__chip.chip--bottom {
-    bottom: 18%;
+    bottom: 15%;
     right: -0.25rem;
-    font-size: 0.7rem;
-    padding: 0.35rem 0.65rem;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.6rem;
   }
   .avatar-3d__pill, .fig__card {
     position: absolute;
