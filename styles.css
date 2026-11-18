@@ -467,10 +467,10 @@ body.ready .line > span { transform: none; opacity: 1; }
 /* 3D Interactive Animated Avatar Stage */
 .avatar-3d {
   position: absolute;
-  right: clamp(1rem, 3.5vw, 4.5rem);
-  bottom: 2.5rem;
-  width: min(40vw, 31rem);
-  height: min(78vh, 47rem);
+  right: clamp(1rem, 2.5vw, 3.5rem);
+  bottom: 2rem;
+  width: min(38vw, 29rem);
+  height: min(76vh, 45rem);
   pointer-events: auto;
   perspective: 1200px;
   transform-style: preserve-3d;
@@ -910,11 +910,11 @@ html[data-mode="dark"] .fig__card {
   margin-bottom: 1.25rem;
 }
 .h1 {
-  font-size: clamp(2.5rem, 6.2vw, 5.2rem);
+  font-size: clamp(2.15rem, 4.2vw, 3.85rem);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -.04em;
-  margin-bottom: 2.25rem;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  margin-bottom: 2rem;
 }
 .h1 .soft {
   color: var(--muted);
