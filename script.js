@@ -836,16 +836,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // =========================================================================
-  // 3D INTERACTIVE AVATAR PHYSICS & REACTION CONTROLLER
+  // ======================================================================  // =========================================================================
+  // // 3D INTERACTIVE AVATAR PHYSICS & REACTION CONTROLLER
   // =========================================================================
   const avatar3D = document.getElementById('avatar3D');
   const avatarCard = document.getElementById('avatarCard');
   const avatarSheen = document.getElementById('avatarSheen');
   const avatarShadow = document.getElementById('avatarShadow');
-  const avatarBubble = document.getElementById('avatarBubble');
-  const avatarBubbleText = document.getElementById('avatarBubbleText');
-  const chips = document.querySelectorAll('.avatar-3d__chip');
 
   if (avatar3D && avatarCard) {
     let currentRotX = 0, currentRotY = 0;
@@ -853,38 +850,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let isHovering = false;
     let isDragging = false;
 
-    // Speech bubble rotating greetings
-    const greetings = [
-      "Hey! Welcome to my portfolio 👋",
-      "Mortgage Ops @ Bank of America 🏛️",
-      "Founder of TapStars NFC Cards 📱",
-      "PDEU Finance Honors · 8.4 CGPA 🎓",
-      "Check out my 4 Doors below! 🚪",
-      "Click 'My ability card' below! 🪪",
-      "Passionate about turning ideas into reality ⚡"
-    ];
-    let greetingIndex = 0;
-
-    const triggerReaction = () => {
-      // Trigger spring nod bounce
+    // Trigger spring nod bounce on avatar tap / click
+    const triggerAvatarBounce = () => {
       avatarCard.classList.remove('avatar-bounce');
       void avatarCard.offsetWidth; // reflow
       avatarCard.classList.add('avatar-bounce');
-
-      // Update speech bubble
-      greetingIndex = (greetingIndex + 1) % greetings.length;
-      if (avatarBubbleText && avatarBubble) {
-        avatarBubbleText.textContent = greetings[greetingIndex];
-        avatarBubble.classList.remove('pop');
-        void avatarBubble.offsetWidth;
-        avatarBubble.classList.add('pop');
-      }
     };
 
     avatar3D.addEventListener('click', (e) => {
-      // Don't trigger if clicked on the ability card button
       if (e.target.closest('#holoOpen')) return;
-      triggerReaction();
+      triggerAvatarBounce();
     });
 
     // Pointer move listener for smooth 3D tilt
@@ -901,30 +876,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const clampedY = Math.max(-1.2, Math.min(1.2, dy));
 
       // Calculate 3D rotations
-      targetRotY = clampedX * 16;
-      targetRotX = -clampedY * 13;
+      targetRotY = clampedX * 15;
+      targetRotX = -clampedY * 12;
 
-      // Update sheen position
+      // Update light sheen position
       if (avatarSheen) {
         const lx = 50 + clampedX * 35;
         const ly = 30 + clampedY * 35;
         avatarSheen.style.setProperty('--lightX', `${lx}%`);
         avatarSheen.style.setProperty('--lightY', `${ly}%`);
-        avatarSheen.style.setProperty('--sheenOpacity', '0.75');
+        avatarSheen.style.setProperty('--sheenOpacity', '0.7');
       }
-
-      // Update differential parallax on floating chips
-      chips.forEach(chip => {
-        const depth = parseFloat(chip.dataset.depth || 0.6);
-        const tx = clampedX * depth * 20;
-        const ty = clampedY * depth * 16;
-        const tz = depth * 55;
-        chip.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px)`;
-      });
 
       // Update ground shadow shift
       if (avatarShadow) {
-        const sx = -clampedX * 18;
+        const sx = -clampedX * 16;
         const scale = 1 - Math.abs(clampedY) * 0.12;
         avatarShadow.style.transform = `translateX(calc(-50% + ${sx}px)) scale(${scale})`;
       }
@@ -937,7 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.clientY - (rect.top + rect.height / 2)
       );
 
-      if (distance < Math.max(rect.width, rect.height) * 1.4) {
+      if (distance < Math.max(rect.width, rect.height) * 1.35) {
         isHovering = true;
         handleMove(e.clientX, e.clientY);
       } else if (isHovering) {
@@ -947,9 +913,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (avatarSheen) {
           avatarSheen.style.setProperty('--sheenOpacity', '0.45');
         }
-        chips.forEach(chip => {
-          chip.style.transform = '';
-        });
         if (avatarShadow) {
           avatarShadow.style.transform = 'translateX(-50%) scale(1)';
         }
@@ -976,23 +939,22 @@ document.addEventListener('DOMContentLoaded', () => {
       isDragging = false;
       targetRotX = 0;
       targetRotY = 0;
-      chips.forEach(chip => { chip.style.transform = ''; });
       if (avatarShadow) avatarShadow.style.transform = 'translateX(-50%) scale(1)';
     }, { passive: true });
 
-    // Gyroscope / DeviceOrientation Support for mobile
+    // Gyroscope / DeviceOrientation Support for mobile devices
     if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function') {
       window.addEventListener('deviceorientation', (e) => {
         if (!isDragging && e.gamma !== null && e.beta !== null) {
-          const gx = Math.max(-30, Math.min(30, e.gamma)) / 30;
+          const gx = Math.max(-25, Math.min(25, e.gamma)) / 25;
           const gy = Math.max(-20, Math.min(20, e.beta - 45)) / 20;
-          targetRotY = gx * 14;
-          targetRotX = -gy * 10;
+          targetRotY = gx * 12;
+          targetRotX = -gy * 9;
         }
       }, { passive: true });
     }
 
-    // Animation Loop with Smooth Lerp
+    // Animation Loop with Smooth Physics Lerp
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
 
     const tickAvatar = () => {
