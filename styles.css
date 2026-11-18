@@ -458,13 +458,322 @@ body.ready .line > span { transform: none; opacity: 1; }
   inset: 0;
   pointer-events: none;
 }
-.fig {
+/* 3D Interactive Animated Avatar Stage */
+.avatar-3d {
   position: absolute;
-  right: clamp(1rem, 7vw, 7rem);
-  bottom: 3.5rem;
-  width: min(44vw, 36rem);
-  height: min(78vh, 52rem);
+  right: clamp(1rem, 6vw, 6.5rem);
+  bottom: 2.5rem;
+  width: min(44vw, 34rem);
+  height: min(78vh, 48rem);
   pointer-events: auto;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+.avatar-3d:active {
+  cursor: grabbing;
+}
+
+/* 3D Depth Backdrop & Rotating Orbital Rings */
+.avatar-3d__halo {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, rgba(140, 98, 57, 0.22) 0%, rgba(217, 119, 6, 0.1) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(28px);
+  z-index: 1;
+  transition: opacity 0.4s ease;
+}
+html[data-mode="dark"] .avatar-3d__halo {
+  background: radial-gradient(circle at center, rgba(217, 119, 6, 0.28) 0%, rgba(140, 98, 57, 0.14) 45%, transparent 70%);
+  filter: blur(36px);
+}
+
+.avatar-3d__orbit {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px dashed rgba(140, 98, 57, 0.28);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+}
+.avatar-3d__orbit--inner {
+  width: 72%;
+  height: 72%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: orbitSpinCw 40s linear infinite;
+}
+.avatar-3d__orbit--outer {
+  width: 96%;
+  height: 96%;
+  border-style: dotted;
+  border-color: rgba(140, 98, 57, 0.18);
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: orbitSpinCcw 60s linear infinite;
+}
+
+@keyframes orbitSpinCw {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes orbitSpinCcw {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* Floating 3D Spatial Chips (Differential Parallax) */
+.avatar-3d__chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  backdrop-filter: var(--glass-blur-md);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.14), var(--glass-specular);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+  pointer-events: none;
+  z-index: 5;
+  white-space: nowrap;
+  transition: transform 0.15s ease-out, opacity 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
+}
+.avatar-3d:hover .avatar-3d__chip {
+  border-color: var(--accent-warm);
+}
+.chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--status-live);
+  box-shadow: 0 0 8px var(--status-live);
+}
+.avatar-3d__chip.chip--top {
+  top: 14%;
+  right: -0.5rem;
+  transform: translateZ(65px);
+}
+.avatar-3d__chip.chip--mid {
+  top: 48%;
+  left: -1rem;
+  transform: translateZ(45px);
+}
+.avatar-3d__chip.chip--bottom {
+  bottom: 22%;
+  right: 0rem;
+  transform: translateZ(55px);
+}
+
+/* Speech / Reaction Bubble */
+.avatar-3d__bubble {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.45rem 1.15rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 6;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  opacity: 0.95;
+  will-change: transform;
+}
+.avatar-3d__bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: var(--foreground) transparent transparent transparent;
+}
+.avatar-3d__bubble.pop {
+  animation: bubblePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes bubblePop {
+  0% { transform: translateX(-50%) scale(0.8) translateY(8px); opacity: 0; }
+  50% { transform: translateX(-50%) scale(1.1) translateY(-4px); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1) translateY(0); opacity: 0.95; }
+}
+
+/* 3D Interactive Card / Figure Container */
+.avatar-3d__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  z-index: 3;
+}
+
+/* Floating Idle Breathing Loop */
+.avatar-3d__card.floating {
+  animation: avatarIdleFloat 4.5s ease-in-out infinite;
+}
+@keyframes avatarIdleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateZ(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotateZ(0.5deg);
+  }
+}
+
+/* Tap Spring Recoil Reaction */
+.avatar-3d__card.avatar-bounce {
+  animation: avatarTapSpring 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+@keyframes avatarTapSpring {
+  0% { transform: scale(1) translateY(0); }
+  25% { transform: scale(1.09) translateY(-20px) rotateZ(2.5deg); }
+  50% { transform: scale(0.97) translateY(6px) rotateZ(-1.5deg); }
+  75% { transform: scale(1.03) translateY(-4px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* 3D Dynamic Specular Sheen (Moves with light angle) */
+.avatar-3d__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  pointer-events: none;
+  background: radial-gradient(circle at var(--lightX, 50%) var(--lightY, 30%), rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 35%, transparent 68%);
+  mix-blend-mode: overlay;
+  opacity: var(--sheenOpacity, 0.55);
+  transition: opacity 0.3s ease;
+  z-index: 4;
+}
+
+/* Character Cutout Image */
+.avatar-3d__img, #figBase {
+  position: relative;
+  width: auto;
+  height: 94%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 24px 38px rgba(0, 0, 0, 0.28)) drop-shadow(0 8px 16px rgba(140, 98, 57, 0.2));
+  user-select: none;
+  pointer-events: auto;
+  transition: filter 0.4s ease;
+  z-index: 3;
+}
+.avatar-3d:hover .avatar-3d__img {
+  filter: drop-shadow(0 30px 48px rgba(0, 0, 0, 0.35)) drop-shadow(0 12px 24px rgba(140, 98, 57, 0.32));
+}
+
+/* Ground Contact Shadow */
+.avatar-3d__shadow {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68%;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.08) 50%, transparent 75%);
+  filter: blur(5px);
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+html[data-mode="dark"] .avatar-3d__shadow {
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 75%);
+}
+
+/* Ability Card Trigger Pill */
+.avatar-3d__pill {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-pill);
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
+  color: var(--foreground);
+  font-size: 0.85rem;
+  font-weight: 600;
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  backdrop-filter: var(--glass-blur-md);
+  box-shadow: var(--glass-shadow-md), var(--glass-specular);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  white-space: nowrap;
+}
+.avatar-3d__pill:hover {
+  transform: translateX(-50%) translateY(-3px) scale(1.03);
+  background: var(--surface);
+  border-color: var(--accent-warm);
+  box-shadow: 0 16px 36px -6px rgba(140, 98, 57, 0.3), var(--glass-specular);
+}
+.pill-sparkle {
+  color: var(--accent-warm);
+  animation: sparkleRotate 3s linear infinite;
+}
+@keyframes sparkleRotate {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+  50% { transform: scale(1.25) rotate(180deg); opacity: 1; }
+}
+
+/* Holo Visual in Modal */
+.holo-avatar-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+.holo-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.25) 45%, rgba(217, 119, 6, 0.2) 50%, rgba(140, 98, 57, 0.15) 55%, transparent 80%);
+  background-size: 200% 200%;
+  animation: holoSheenSlide 5s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+@keyframes holoSheenSlide {
+  0% { background-position: 200% 0; }
+  50% { background-position: -50% 100%; }
+  100% { background-position: 200% 0; }
 }
 @media (max-width: 1023.98px) {
   .hero {
@@ -498,19 +807,37 @@ body.ready .line > span { transform: none; opacity: 1; }
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
   }
-  .fig {
+  .avatar-3d, .fig {
     position: relative;
     right: auto;
     bottom: auto;
     left: auto;
     transform: none;
-    width: min(85vw, 19rem);
-    height: clamp(19rem, 48vh, 24rem);
+    width: min(92vw, 22rem);
+    height: clamp(20rem, 50vh, 26rem);
     margin: 0 auto;
   }
-  .fig__card {
+  .avatar-3d__chip.chip--top {
+    top: 8%;
+    right: -0.25rem;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .avatar-3d__chip.chip--mid {
+    top: 44%;
+    left: -0.5rem;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .avatar-3d__chip.chip--bottom {
+    bottom: 18%;
+    right: -0.25rem;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .avatar-3d__pill, .fig__card {
     position: absolute;
-    bottom: 1rem;
+    bottom: 0.75rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
