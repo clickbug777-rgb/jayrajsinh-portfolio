@@ -897,8 +897,9 @@ html[data-mode="dark"] .fig__card {
 .hero__content {
   position: relative;
   z-index: 2;
-  padding-top: clamp(3rem, 10vh, 7rem);
-  max-width: 48rem;
+  padding-top: clamp(2rem, 8vh, 5rem);
+  max-width: min(50vw, 38rem);
+  margin-left: 0;
 }
 .eyebrow {
   font-family: var(--font-mono);
@@ -923,10 +924,9 @@ html[data-mode="dark"] .fig__card {
 
 /* Mechanical Desk Flip Calendar */
 .cal-line {
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle;
-  margin-left: .2em;
+  display: block;
+  margin-top: .15em;
+  margin-left: 0;
 }
 .cal {
   display: inline-flex;
