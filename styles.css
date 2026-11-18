@@ -824,15 +824,12 @@ html[data-mode="dark"] .avatar-3d__shadow {
     margin: 0 auto;
   }
   .avatar-3d__bubble {
-    top: -0.25rem;
-    font-size: 0.72rem;
-    padding: 0.35rem 0.85rem;
+    top: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.9rem;
   }
   .avatar-3d__chip.chip--top {
-    top: 14%;
-    right: -0.25rem;
-    font-size: 0.68rem;
-    padding: 0.3rem 0.6rem;
+    display: none; /* Redundant on mobile since BofA is already in the top status pill */
   }
   .avatar-3d__chip.chip--mid {
     top: 48%;
