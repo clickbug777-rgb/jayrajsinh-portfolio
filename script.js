@@ -836,13 +836,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ======================================================================  // =========================================================================
+  // ======================================================================  // =========================================================================  // =========================================================================
   // // 3D INTERACTIVE AVATAR PHYSICS & REACTION CONTROLLER
   // =========================================================================
   const avatar3D = document.getElementById('avatar3D');
   const avatarCard = document.getElementById('avatarCard');
   const avatarSheen = document.getElementById('avatarSheen');
   const avatarShadow = document.getElementById('avatarShadow');
+  const avatarBubble = document.getElementById('avatarBubble');
+  const avatarBubbleText = document.getElementById('avatarBubbleText');
+  const chips = document.querySelectorAll('.avatar-3d__chip');
 
   if (avatar3D && avatarCard) {
     let currentRotX = 0, currentRotY = 0;
@@ -850,19 +853,40 @@ document.addEventListener('DOMContentLoaded', () => {
     let isHovering = false;
     let isDragging = false;
 
-    // Trigger spring nod bounce on avatar tap / click
-    const triggerAvatarBounce = () => {
+    // Speech bubble rotating greetings on click/tap
+    const greetings = [
+      "Hey! Welcome to my portfolio 👋",
+      "Mortgage Ops @ Bank of America 🏛️",
+      "Founder of TapStars NFC Cards 📱",
+      "PDEU Finance Honors · 8.4 CGPA 🎓",
+      "Check out my 4 Doors below! 🚪",
+      "Click 'My ability card' below! 🪪",
+      "Turning ideas into reality ⚡"
+    ];
+    let greetingIndex = 0;
+
+    const triggerReaction = () => {
+      // Spring nod bounce
       avatarCard.classList.remove('avatar-bounce');
       void avatarCard.offsetWidth; // reflow
       avatarCard.classList.add('avatar-bounce');
+
+      // Update speech bubble
+      greetingIndex = (greetingIndex + 1) % greetings.length;
+      if (avatarBubbleText && avatarBubble) {
+        avatarBubbleText.textContent = greetings[greetingIndex];
+        avatarBubble.classList.remove('pop');
+        void avatarBubble.offsetWidth;
+        avatarBubble.classList.add('pop');
+      }
     };
 
     avatar3D.addEventListener('click', (e) => {
       if (e.target.closest('#holoOpen')) return;
-      triggerAvatarBounce();
+      triggerReaction();
     });
 
-    // Pointer move listener for smooth 3D tilt
+    // Pointer move listener for smooth 3D tilt & differential chip parallax
     const handleMove = (clientX, clientY) => {
       const rect = avatar3D.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
@@ -887,6 +911,15 @@ document.addEventListener('DOMContentLoaded', () => {
         avatarSheen.style.setProperty('--lightY', `${ly}%`);
         avatarSheen.style.setProperty('--sheenOpacity', '0.7');
       }
+
+      // Update differential parallax on out-of-body floating chips
+      chips.forEach(chip => {
+        const depth = parseFloat(chip.dataset.depth || 0.6);
+        const tx = clampedX * depth * 22;
+        const ty = clampedY * depth * 16;
+        const tz = depth * 55;
+        chip.style.transform = `translate3d(${tx}px, ${ty}px, ${tz}px)`;
+      });
 
       // Update ground shadow shift
       if (avatarShadow) {
@@ -913,6 +946,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (avatarSheen) {
           avatarSheen.style.setProperty('--sheenOpacity', '0.45');
         }
+        chips.forEach(chip => {
+          chip.style.transform = '';
+        });
         if (avatarShadow) {
           avatarShadow.style.transform = 'translateX(-50%) scale(1)';
         }
@@ -939,6 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isDragging = false;
       targetRotX = 0;
       targetRotY = 0;
+      chips.forEach(chip => { chip.style.transform = ''; });
       if (avatarShadow) avatarShadow.style.transform = 'translateX(-50%) scale(1)';
     }, { passive: true });
 

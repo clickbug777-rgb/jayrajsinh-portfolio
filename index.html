@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=unclutter1" />
+  <link rel="stylesheet" href="styles.css?v=outofbody1" />
 </head>
 <body class="loading">
   <!-- Skip Link -->
@@ -148,16 +148,36 @@
       <!-- Cutout Portrait Anchored Right -->
       <!-- 3D Interactive Animated Avatar Stage -->
       <!-- 3D Interactive Animated Avatar Stage (Unobstructed & Spacious) -->
+      <!-- 3D Interactive Animated Avatar Stage (Out-of-Body Spatial Elements) -->
       <div class="hero__stage" id="heroStage">
-        <div class="avatar-3d" id="avatar3D" role="region" aria-label="Interactive 3D Avatar of JayrajSinh — Drag to tilt, tap to inspect">
+        <div class="avatar-3d" id="avatar3D" role="region" aria-label="Interactive 3D Avatar of JayrajSinh — Drag to tilt, tap to interact">
           <!-- 3D Depth Backdrop & Rotating Orbital Rings -->
           <div class="avatar-3d__halo" aria-hidden="true"></div>
           <div class="avatar-3d__orbit avatar-3d__orbit--inner" aria-hidden="true"></div>
           <div class="avatar-3d__orbit avatar-3d__orbit--outer" aria-hidden="true"></div>
 
-          <!-- 3D Interactive Card / Figure Container -->
+          <!-- Out-of-Body Floating Spatial Chips (Positioned in Open Space Around Silhouette) -->
+          <div class="avatar-3d__chip chip--top-right" data-depth="0.75" aria-hidden="true">
+            <span class="chip-dot"></span>
+            <span class="chip-text">Bank of America · GIFT City</span>
+          </div>
+          <div class="avatar-3d__chip chip--left" data-depth="0.55" aria-hidden="true">
+            <span class="chip-icon">🎓</span>
+            <span class="chip-text">BBA Finance · 8.4 CGPA</span>
+          </div>
+          <div class="avatar-3d__chip chip--right" data-depth="0.8" aria-hidden="true">
+            <span class="chip-icon">⚡</span>
+            <span class="chip-text">Digital Builder &amp; Creator</span>
+          </div>
+
+          <!-- Out-of-Body Speech / Reaction Bubble (Floats cleanly above hair) -->
+          <div class="avatar-3d__bubble" id="avatarBubble" aria-hidden="true">
+            <span id="avatarBubbleText">Hey! Tap or drag me 👋</span>
+          </div>
+
+          <!-- 3D Interactive Figure Container (100% Unobstructed Silhouette) -->
           <div class="avatar-3d__card" id="avatarCard">
-            <!-- 3D Dynamic Specular Sheen (Moves with light angle) -->
+            <!-- 3D Dynamic Specular Sheen (Moves with light vector) -->
             <div class="avatar-3d__sheen" id="avatarSheen" aria-hidden="true"></div>
 
             <!-- 3D Character Mesh / Cutout Image -->
@@ -167,7 +187,7 @@
           <!-- Ground Contact Shadow with Dynamic 3D Perspective -->
           <div class="avatar-3d__shadow" id="avatarShadow" aria-hidden="true"></div>
 
-          <!-- Ability Card Trigger Pill (Cleanly anchored at bottom base) -->
+          <!-- Out-of-Body Ability Card Trigger Pill (Anchored cleanly below base) -->
           <button class="fig__card avatar-3d__pill" id="holoOpen" aria-haspopup="dialog" aria-controls="holo" title="Inspect JayrajSinh 3D Ability Card">
             <span class="pill-sparkle">✦</span>
             <span>My ability card</span>
@@ -677,7 +697,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=unclutter1"></script>
+  <script src="script.js?v=outofbody1"></script>
 <div id="doorCursor" class="door-cursor" aria-hidden="true">Click to enter</div>
 </body>
 </html>
