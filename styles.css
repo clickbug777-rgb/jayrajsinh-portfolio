@@ -467,10 +467,10 @@ body.ready .line > span { transform: none; opacity: 1; }
 /* 3D Interactive Animated Avatar Stage (Out-of-Body Spatial Elements) */
 .avatar-3d {
   position: absolute;
-  right: clamp(2rem, 5vw, 6rem);
-  bottom: 3.5rem;
-  width: min(36vw, 28rem);
-  height: min(78vh, 46rem);
+  right: clamp(2rem, 5.5vw, 6.5rem);
+  bottom: 4.5rem;
+  width: min(34vw, 26rem);
+  height: min(76vh, 44rem);
   pointer-events: auto;
   perspective: 1200px;
   transform-style: preserve-3d;
@@ -488,12 +488,12 @@ body.ready .line > span { transform: none; opacity: 1; }
 /* 3D Depth Backdrop & Rotating Orbital Rings */
 .avatar-3d__halo {
   position: absolute;
-  top: 48%;
+  top: 45%;
   left: 50%;
   width: 95%;
   height: 95%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle at center, rgba(140, 98, 57, 0.22) 0%, rgba(217, 119, 6, 0.08) 45%, transparent 72%);
+  background: radial-gradient(circle at center, rgba(140, 98, 57, 0.2) 0%, rgba(217, 119, 6, 0.08) 45%, transparent 72%);
   border-radius: 50%;
   pointer-events: none;
   filter: blur(32px);
@@ -501,16 +501,16 @@ body.ready .line > span { transform: none; opacity: 1; }
   transition: opacity 0.4s ease;
 }
 html[data-mode="dark"] .avatar-3d__halo {
-  background: radial-gradient(circle at center, rgba(217, 119, 6, 0.28) 0%, rgba(140, 98, 57, 0.12) 48%, transparent 72%);
+  background: radial-gradient(circle at center, rgba(217, 119, 6, 0.25) 0%, rgba(140, 98, 57, 0.12) 48%, transparent 72%);
   filter: blur(40px);
 }
 
 .avatar-3d__orbit {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   border-radius: 50%;
-  border: 1px dashed rgba(140, 98, 57, 0.24);
+  border: 1px dashed rgba(140, 98, 57, 0.22);
   pointer-events: none;
   z-index: 1;
   will-change: transform;
@@ -522,10 +522,10 @@ html[data-mode="dark"] .avatar-3d__halo {
   animation: orbitSpinCw 45s linear infinite;
 }
 .avatar-3d__orbit--outer {
-  width: 106%;
-  height: 106%;
+  width: 108%;
+  height: 108%;
   border-style: dotted;
-  border-color: rgba(140, 98, 57, 0.16);
+  border-color: rgba(140, 98, 57, 0.15);
   transform: translate(-50%, -50%) rotate(0deg);
   animation: orbitSpinCcw 65s linear infinite;
 }
@@ -539,7 +539,7 @@ html[data-mode="dark"] .avatar-3d__halo {
   to { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
-/* OUT-OF-BODY FLOATING SPATIAL CHIPS */
+/* OUT-OF-BODY FLOATING SPATIAL CHIPS (Completely outside body silhouette) */
 .avatar-3d__chip {
   position: absolute;
   display: inline-flex;
@@ -572,27 +572,29 @@ html[data-mode="dark"] .avatar-3d__halo {
   background: var(--status-live);
   box-shadow: 0 0 8px var(--status-live);
 }
-/* Flanked completely OUTSIDE the body silhouette */
+
+/* Desktop Out-of-Body Coordinates: Fully detached with clean negative space */
 .avatar-3d__chip.chip--top-right {
-  top: 6%;
-  right: -3.5rem;
+  top: 2%;
+  right: -2rem;
   transform: translateZ(65px);
 }
 .avatar-3d__chip.chip--left {
-  top: 50%;
-  left: -4.5rem;
-  transform: translateZ(50px);
+  top: 38%;
+  left: -8.5rem;
+  transform: translateZ(55px);
 }
 .avatar-3d__chip.chip--right {
-  top: 72%;
-  right: -4rem;
+  top: 64%;
+  left: -7.5rem;
+  right: auto;
   transform: translateZ(55px);
 }
 
-/* OUT-OF-BODY SPEECH / REACTION BUBBLE (Floats high above hair) */
+/* OUT-OF-BODY SPEECH BUBBLE (Floats comfortably above hair) */
 .avatar-3d__bubble {
   position: absolute;
-  top: -2rem;
+  top: -3rem;
   left: 50%;
   transform: translateX(-50%) translateY(0);
   background: var(--foreground);
@@ -628,11 +630,12 @@ html[data-mode="dark"] .avatar-3d__halo {
   100% { transform: translateX(-50%) scale(1) translateY(0); opacity: 0.95; }
 }
 
-/* 3D Interactive Card / Figure Container */
+/* 3D Interactive Card Container */
 .avatar-3d__card {
   position: relative;
   width: 100%;
-  height: 88%;
+  height: 80%;
+  margin-bottom: 3.8rem; /* Generous gap so floor elements NEVER touch the hoodie */
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -679,11 +682,11 @@ html[data-mode="dark"] .avatar-3d__halo {
   z-index: 4;
 }
 
-/* Character Cutout Image (Completely clean, unobstructed silhouette) */
+/* Character Cutout Image (Clean, 100% unobstructed silhouette) */
 .avatar-3d__img, #figBase {
   position: relative;
   width: auto;
-  height: 94%;
+  height: 100%;
   max-width: 100%;
   object-fit: contain;
   object-position: bottom center;
@@ -700,11 +703,11 @@ html[data-mode="dark"] .avatar-3d__halo {
 /* Ground Contact Shadow */
 .avatar-3d__shadow {
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 3.4rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 65%;
-  height: 22px;
+  width: 62%;
+  height: 20px;
   border-radius: 50%;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.08) 50%, transparent 75%);
   filter: blur(5px);
@@ -717,10 +720,10 @@ html[data-mode="dark"] .avatar-3d__shadow {
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.18) 50%, transparent 75%);
 }
 
-/* Out-of-Body Ability Card Trigger Pill (Anchored cleanly below base) */
+/* OUT-OF-BODY ABILITY PILL (Anchored cleanly on floor plane below ground shadow) */
 .avatar-3d__pill {
   position: absolute;
-  bottom: -1.85rem;
+  bottom: 0rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -812,7 +815,7 @@ html[data-mode="dark"] .avatar-3d__shadow {
     align-items: center;
     pointer-events: auto;
     margin-top: 2rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 4rem;
     overflow: visible;
   }
   .avatar-3d, .fig {
@@ -822,7 +825,7 @@ html[data-mode="dark"] .avatar-3d__shadow {
     left: auto;
     transform: none;
     width: min(92vw, 21rem);
-    height: clamp(20rem, 48vh, 25rem);
+    height: clamp(22rem, 52vh, 27rem);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -830,42 +833,52 @@ html[data-mode="dark"] .avatar-3d__shadow {
     justify-content: flex-end;
   }
   .avatar-3d__card {
-    height: 80%;
+    height: 68%;
+    margin-bottom: 5.5rem; /* Abundant clearance below hoodie on mobile */
   }
+  .avatar-3d__shadow {
+    bottom: 5.2rem;
+  }
+  /* On mobile: speech bubble sits comfortably above the hair */
   .avatar-3d__bubble {
-    top: -2.25rem;
+    top: -2.85rem;
     font-size: 0.72rem;
     padding: 0.35rem 0.85rem;
   }
-  /* On mobile: chips flank the outer margins cleanly outside the silhouette */
+  /* Top-right chip is hidden on mobile to avoid overcrowding */
   .avatar-3d__chip.chip--top-right {
-    top: -0.5rem;
-    right: -0.25rem;
-    font-size: 0.65rem;
-    padding: 0.28rem 0.55rem;
+    display: none;
   }
+  /* On mobile: Tier 1 - Ability card pill cleanly positioned below ground shadow */
+  .avatar-3d__pill, .fig__card {
+    position: absolute;
+    bottom: 2.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    z-index: 10;
+    font-size: 0.78rem;
+    padding: 0.42rem 1.1rem;
+  }
+  /* On mobile: Tier 2 - Dual status chips cleanly docked at base */
   .avatar-3d__chip.chip--left {
-    top: 52%;
-    left: -0.85rem;
+    top: auto;
+    bottom: 0.4rem;
+    left: 0.5rem;
+    right: auto;
     font-size: 0.65rem;
     padding: 0.28rem 0.55rem;
   }
   .avatar-3d__chip.chip--right {
-    top: 70%;
-    right: -0.85rem;
+    top: auto;
+    bottom: 0.4rem;
+    right: 0.5rem;
+    left: auto;
     font-size: 0.65rem;
     padding: 0.28rem 0.55rem;
   }
-  .avatar-3d__pill, .fig__card {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    margin-top: 1rem;
-    z-index: 10;
-  }
   .avatar-3d__pill:hover {
-    transform: translateY(-2px);
+    transform: translateX(-50%) translateY(-2px);
   }
   .hero__bar {
     order: 3;
