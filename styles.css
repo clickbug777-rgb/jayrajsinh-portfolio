@@ -829,7 +829,7 @@ html[data-mode="dark"] .avatar-3d__shadow {
     padding: 0.35rem 0.9rem;
   }
   .avatar-3d__chip.chip--top {
-    display: none; /* Redundant on mobile since BofA is already in the top status pill */
+    display: none !important; /* Redundant on mobile since BofA is already in the top status pill */
   }
   .avatar-3d__chip.chip--mid {
     top: 48%;
