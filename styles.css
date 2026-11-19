@@ -347,13 +347,13 @@ body.ready .line > span { transform: none; opacity: 1; }
   top: 0;
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 100;
   height: var(--bar-h);
   display: flex;
   align-items: center;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur-md);
-  backdrop-filter: var(--glass-blur-md);
+  background: color-mix(in srgb, var(--background) 90%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--glass-border-subtle);
   transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
@@ -791,7 +791,7 @@ html[data-mode="dark"] .avatar-3d__shadow {
     flex-direction: column;
     height: auto;
     min-height: auto;
-    padding-top: calc(var(--bar-h) + 1rem);
+    padding-top: calc(var(--bar-h) + 0.75rem);
     padding-bottom: 0;
     overflow: visible;
   }
@@ -799,8 +799,8 @@ html[data-mode="dark"] .avatar-3d__shadow {
     order: 1;
     position: relative;
     z-index: 5;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
     max-width: 100%;
     width: 100%;
   }
@@ -814,8 +814,8 @@ html[data-mode="dark"] .avatar-3d__shadow {
     justify-content: center;
     align-items: center;
     pointer-events: auto;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
     overflow: visible;
   }
   .avatar-3d, .fig {
@@ -824,58 +824,62 @@ html[data-mode="dark"] .avatar-3d__shadow {
     bottom: auto;
     left: auto;
     transform: none;
-    width: min(92vw, 21rem);
-    height: clamp(22rem, 52vh, 27rem);
+    width: min(88vw, 19.5rem);
+    height: clamp(18.5rem, 44vh, 21.5rem);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
   }
+  .avatar-3d__halo {
+    width: 84%;
+    height: 84%;
+    max-width: 82vw;
+    max-height: 82vw;
+  }
+  .avatar-3d__orbit--inner {
+    width: 74%;
+    height: 74%;
+  }
+  .avatar-3d__orbit--outer {
+    width: 92%;
+    height: 92%;
+  }
   .avatar-3d__card {
-    height: 68%;
-    margin-bottom: 5.5rem; /* Abundant clearance below hoodie on mobile */
+    height: 66%;
+    margin-bottom: 4.8rem; /* Clean clearance below hoodie */
   }
   .avatar-3d__shadow {
-    bottom: 5.2rem;
+    bottom: 4.5rem;
+    width: 58%;
+    height: 18px;
   }
-  /* On mobile: speech bubble sits comfortably above the hair */
+  /* On mobile: speech bubble sits comfortably with 20px clearance above hair */
   .avatar-3d__bubble {
-    top: -2.85rem;
-    font-size: 0.72rem;
+    top: -2.35rem;
+    font-size: 0.74rem;
     padding: 0.35rem 0.85rem;
+    white-space: nowrap;
   }
-  /* Top-right chip is hidden on mobile to avoid overcrowding */
-  .avatar-3d__chip.chip--top-right {
-    display: none;
+  /* All floating spatial chips hidden on mobile/tablet to give 100% clean visual focus */
+  .avatar-3d__chip.chip--top-right,
+  .avatar-3d__chip.chip--left,
+  .avatar-3d__chip.chip--right {
+    display: none !important;
   }
-  /* On mobile: Tier 1 - Ability card pill cleanly positioned below ground shadow */
+  /* Tier 1: Ability card pill cleanly anchored below ground shadow */
   .avatar-3d__pill, .fig__card {
     position: absolute;
-    bottom: 2.6rem;
+    bottom: 0.85rem;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 0;
     z-index: 10;
-    font-size: 0.78rem;
-    padding: 0.42rem 1.1rem;
-  }
-  /* On mobile: Tier 2 - Dual status chips cleanly docked at base */
-  .avatar-3d__chip.chip--left {
-    top: auto;
-    bottom: 0.4rem;
-    left: 0.5rem;
-    right: auto;
-    font-size: 0.65rem;
-    padding: 0.28rem 0.55rem;
-  }
-  .avatar-3d__chip.chip--right {
-    top: auto;
-    bottom: 0.4rem;
-    right: 0.5rem;
-    left: auto;
-    font-size: 0.65rem;
-    padding: 0.28rem 0.55rem;
+    font-size: 0.82rem;
+    padding: 0.48rem 1.25rem;
+    white-space: nowrap;
+    box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.14), var(--glass-specular);
   }
   .avatar-3d__pill:hover {
     transform: translateX(-50%) translateY(-2px);
@@ -1743,19 +1747,20 @@ html[data-mode="dark"] .door-cursor {
     margin-bottom: 1.5rem;
   }
   
-  /* CTAs: Stacked vertically with full touch target */
+  /* CTAs: Compact, thumb-friendly 2-column grid for smartphone */
   .ctas {
-    display: flex;
-    flex-direction: column;
-    gap: .75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .65rem;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: .65rem;
   }
   .ctas .pill {
     width: 100%;
     justify-content: center;
-    padding: .85rem 1.25rem;
-    font-size: .925rem;
+    padding: .75rem .75rem;
+    font-size: .84rem;
+    white-space: nowrap;
   }
 
   /* Portrait Stage: Cleanly flows BELOW CTAs with zero text overlap */

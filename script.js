@@ -955,38 +955,67 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
 
-    // Touch Dragging for mobile / touchscreens
+    // Touch Dragging with Smart Scroll-Protection for Smartphones
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isVerticalScroll = false;
+
     avatar3D.addEventListener('touchstart', (e) => {
       if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isVerticalScroll = false;
         isDragging = true;
-        const t = e.touches[0];
-        handleMove(t.clientX, t.clientY);
       }
     }, { passive: true });
 
     avatar3D.addEventListener('touchmove', (e) => {
-      if (isDragging && e.touches.length === 1) {
-        const t = e.touches[0];
+      if (!isDragging || e.touches.length !== 1) return;
+      const t = e.touches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+
+      // If user is scrolling vertically down/up, immediately release 3D drag so page scroll is silky smooth
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) {
+        isVerticalScroll = true;
+        isDragging = false;
+        targetRotX = 0;
+        targetRotY = 0;
+        chips.forEach(chip => { chip.style.transform = ''; });
+        if (avatarShadow) avatarShadow.style.transform = 'translateX(-50%) scale(1)';
+        return;
+      }
+
+      if (!isVerticalScroll) {
         handleMove(t.clientX, t.clientY);
       }
     }, { passive: true });
 
     avatar3D.addEventListener('touchend', () => {
       isDragging = false;
+      isVerticalScroll = false;
       targetRotX = 0;
       targetRotY = 0;
       chips.forEach(chip => { chip.style.transform = ''; });
       if (avatarShadow) avatarShadow.style.transform = 'translateX(-50%) scale(1)';
     }, { passive: true });
 
-    // Gyroscope / DeviceOrientation Support for mobile devices
+    // Stabilized Device Gyroscope with Deadzone & Smoothing
+    let lastGamma = 0;
+    let lastBeta = 0;
     if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function') {
       window.addEventListener('deviceorientation', (e) => {
         if (!isDragging && e.gamma !== null && e.beta !== null) {
-          const gx = Math.max(-25, Math.min(25, e.gamma)) / 25;
-          const gy = Math.max(-20, Math.min(20, e.beta - 45)) / 20;
-          targetRotY = gx * 12;
-          targetRotX = -gy * 9;
+          const rawGamma = Math.max(-20, Math.min(20, e.gamma));
+          const rawBeta = Math.max(-20, Math.min(20, e.beta - 45));
+          
+          // Deadzone to filter out natural micro-tremors and hand jitter
+          if (Math.abs(rawGamma - lastGamma) > 1.2 || Math.abs(rawBeta - lastBeta) > 1.2) {
+            lastGamma = rawGamma;
+            lastBeta = rawBeta;
+            targetRotY = (rawGamma / 20) * 8;
+            targetRotX = -(rawBeta / 20) * 6;
+          }
         }
       }, { passive: true });
     }
