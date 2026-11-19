@@ -565,6 +565,8 @@ html[data-mode="dark"] .avatar-3d__halo {
 .avatar-3d:hover .avatar-3d__chip {
   border-color: var(--accent-warm);
 }
+.chip-full { display: inline; }
+.chip-short { display: none; }
 .chip-dot {
   width: 7px;
   height: 7px;
@@ -824,8 +826,9 @@ html[data-mode="dark"] .avatar-3d__shadow {
     bottom: auto;
     left: auto;
     transform: none;
-    width: min(88vw, 19.5rem);
-    height: clamp(18.5rem, 44vh, 21.5rem);
+    width: 100%;
+    max-width: 25rem;
+    height: clamp(19.5rem, 46vh, 22.5rem);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -862,12 +865,65 @@ html[data-mode="dark"] .avatar-3d__shadow {
     padding: 0.35rem 0.85rem;
     white-space: nowrap;
   }
-  /* All floating spatial chips hidden on mobile/tablet to give 100% clean visual focus */
-  .avatar-3d__chip.chip--top-right,
-  .avatar-3d__chip.chip--left,
-  .avatar-3d__chip.chip--right {
-    display: none !important;
+  /* Toggle mobile compact chip labels */
+  .chip-full { display: none !important; }
+  .chip-short { display: inline !important; }
+
+  /* Mobile Floating Spatial Chips: Hovering strictly in open perimeter with zero character overlap */
+  .avatar-3d__chip {
+    display: inline-flex !important;
+    position: absolute;
+    font-size: 0.64rem;
+    font-weight: 600;
+    padding: 0.26rem 0.55rem;
+    gap: 0.3rem;
+    border-radius: 999px;
+    background: var(--glass-bg-elevated);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: var(--glass-blur-md);
+    backdrop-filter: var(--glass-blur-md);
+    box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.12), var(--glass-specular);
+    z-index: 8;
+    pointer-events: auto;
+    white-space: nowrap;
+    animation: floatOrbitMob 4s ease-in-out infinite alternate;
   }
+
+  /* Top-Right: Hovers in open sky to the right of hair (clear of head by 40px+) */
+  .avatar-3d__chip.chip--top-right {
+    top: 8%;
+    right: 0.65rem;
+    left: auto;
+    bottom: auto;
+    transform: translateZ(45px);
+    animation-delay: 0.2s;
+  }
+
+  /* Left: Hovers in open canvas to the left of glasses/ear (clear of face by 45px+) */
+  .avatar-3d__chip.chip--left {
+    top: 36%;
+    left: 0.65rem;
+    right: auto;
+    bottom: auto;
+    transform: translateZ(40px);
+    animation-delay: 0.9s;
+  }
+
+  /* Right: Hovers in open canvas beside neck/collar (clear of body by 35px+) */
+  .avatar-3d__chip.chip--right {
+    top: 52%;
+    right: 0.35rem;
+    left: auto;
+    bottom: auto;
+    transform: translateZ(50px);
+    animation-delay: 1.6s;
+  }
+
+  @keyframes floatOrbitMob {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-5px); }
+  }
+
   /* Tier 1: Ability card pill cleanly anchored below ground shadow */
   .avatar-3d__pill, .fig__card {
     position: absolute;
